@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7cgghr4mk2pa"]
+[gd_scene load_steps=12 format=3 uid="uid://b7cgghr4mk2pa"]
 
 [ext_resource type="Script" path="res://data/nodes/damage_target.gd" id="1_a244l"]
 [ext_resource type="Texture2D" uid="uid://7h7ujfkn4cf1" path="res://data/sprites/heart-01.png" id="1_ckgt5"]
 [ext_resource type="Script" path="res://data/scenes/dungeon_heart.gd" id="1_odn4d"]
 [ext_resource type="Texture2D" uid="uid://cm4pufp573q80" path="res://data/sprites/heart-02.png" id="2_avh0e"]
+[ext_resource type="Material" uid="uid://caabkyh33pd4j" path="res://data/shader/NokiaMaterial.tres" id="4_od2jv"]
 [ext_resource type="Script" path="res://data/nodes/health.gd" id="4_og07a"]
 
 [sub_resource type="Animation" id="Animation_woock"]
@@ -23,8 +24,40 @@ tracks/0/keys = {
 "values": [ExtResource("1_ckgt5"), ExtResource("2_avh0e"), ExtResource("1_ckgt5"), ExtResource("2_avh0e"), ExtResource("1_ckgt5"), ExtResource("1_ckgt5")]
 }
 
+[sub_resource type="Animation" id="Animation_8re66"]
+resource_name = "damaged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/invert")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_v0nbm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/invert")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m8qeo"]
 _data = {
+"RESET": SubResource("Animation_v0nbm"),
+"damaged": SubResource("Animation_8re66"),
 "heart_beat": SubResource("Animation_woock")
 }
 
@@ -42,16 +75,19 @@ libraries = {
 autoplay = "heart_beat"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("4_od2jv")
 texture = ExtResource("1_ckgt5")
 
 [node name="DamageTarget2D" type="Area2D" parent="."]
 script = ExtResource("1_a244l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageTarget2D"]
+visible = false
 shape = SubResource("RectangleShape2D_ql1n6")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_og07a")
 
+[connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]
 [connection signal="damaged" from="DamageTarget2D" to="Health" method="decrement_health"]
 [connection signal="died" from="Health" to="." method="die"]

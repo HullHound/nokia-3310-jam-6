@@ -3,16 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://bcl1afttwhcy1" path="res://data/scenes/Game.tscn" id="1"]
 [ext_resource type="Shader" path="res://data/shader/OrderedDither.gdshader" id="1_4lj7c"]
 
-[sub_resource type="ShaderMaterial" id="1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5oat6"]
 shader = ExtResource("1_4lj7c")
 shader_parameter/ColorLight = Color(0.780392, 0.941176, 0.847059, 1)
 shader_parameter/ColorDark = Color(0.262745, 0.321569, 0.239216, 1)
-shader_parameter/ScreenSize = Vector3(84, 48, 0)
+shader_parameter/invert = false
 
 [node name="Main" type="Node"]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-material = SubResource("1")
+material = SubResource("ShaderMaterial_5oat6")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

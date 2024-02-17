@@ -12,3 +12,7 @@ func _process(delta: float) -> void:
 
 func die():
 	died.emit()
+
+func _on_damage_target_2d_damaged(damage_amount: float) -> void:
+	$AnimationPlayer.play("damaged")
+	$AnimationPlayer.queue("heart_beat")
