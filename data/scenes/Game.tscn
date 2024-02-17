@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcl1afttwhcy1"]
+[gd_scene load_steps=6 format=3 uid="uid://bcl1afttwhcy1"]
 
 [ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_3orjx"]
 [ext_resource type="PackedScene" uid="uid://b7cgghr4mk2pa" path="res://data/scenes/dungeon_heart.tscn" id="3_osh5k"]
 [ext_resource type="Script" path="res://data/scenes/Game.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://d2eqau2as3123" path="res://data/scenes/end_screen.tscn" id="4_q48f5"]
+[ext_resource type="PackedScene" uid="uid://b1fvhdp4123lx" path="res://data/scenes/goblin.tscn" id="5_7sdhw"]
 
 [node name="Game" type="Node"]
 script = ExtResource("4")
@@ -38,6 +39,9 @@ theme = ExtResource("2_3orjx")
 
 [node name="EndScreen" parent="UI" instance=ExtResource("4_q48f5")]
 visible = false
+
+[node name="Goblin" parent="." instance=ExtResource("5_7sdhw")]
+position = Vector2(16, 16)
 
 [connection signal="died" from="PlayerDungeonHeart" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="died" from="EnemyDungeonHeart" to="." method="_on_enemy_dungeon_heart_died"]

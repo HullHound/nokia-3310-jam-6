@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://b1fvhdp4123lx"]
+
+[ext_resource type="Script" path="res://data/scenes/goblin.gd" id="1_ds06r"]
+[ext_resource type="Texture2D" uid="uid://bxneset5fpjyn" path="res://data/sprites/1 Bit Adventure Pack.png" id="1_s55wf"]
+[ext_resource type="Script" path="res://data/nodes/health.gd" id="2_hmy46"]
+[ext_resource type="Material" uid="uid://caabkyh33pd4j" path="res://data/shader/NokiaMaterial.tres" id="2_pw8f0"]
+[ext_resource type="Script" path="res://data/nodes/damage_target.gd" id="4_hlm0u"]
+[ext_resource type="Material" uid="uid://yudv6e212hb6" path="res://data/shader/NokiaMaterial_Inverted.tres" id="6_lfl15"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmu6x"]
+atlas = ExtResource("1_s55wf")
+region = Rect2(8, 40, 8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e5q4"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_80uq6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_pw8f0")]
+}
+
+[sub_resource type="Animation" id="Animation_fgv7d"]
+resource_name = "damaged"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_pw8f0"), ExtResource("6_lfl15"), ExtResource("2_pw8f0"), ExtResource("6_lfl15"), ExtResource("2_pw8f0")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2s03d"]
+_data = {
+"RESET": SubResource("Animation_80uq6"),
+"damaged": SubResource("Animation_fgv7d")
+}
+
+[node name="Goblin" type="Node2D"]
+script = ExtResource("1_ds06r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_pw8f0")
+texture = SubResource("AtlasTexture_jmu6x")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_hmy46")
+
+[node name="DamageTarget2D" type="Area2D" parent="."]
+script = ExtResource("4_hlm0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageTarget2D"]
+visible = false
+shape = SubResource("RectangleShape2D_1e5q4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2s03d")
+}
+
+[connection signal="died" from="Health" to="." method="die"]
+[connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://yudv6e212hb6"]
+
+[ext_resource type="Shader" path="res://data/shader/OrderedDither.gdshader" id="1_dhkl4"]
+
+[resource]
+shader = ExtResource("1_dhkl4")
+shader_parameter/ColorLight = Color(0.780392, 0.941176, 0.847059, 1)
+shader_parameter/ColorDark = Color(0.262745, 0.321569, 0.239216, 1)
+shader_parameter/invert = true
