@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7cgghr4mk2pa"]
+[gd_scene load_steps=15 format=3 uid="uid://b7cgghr4mk2pa"]
 
 [ext_resource type="Script" path="res://data/nodes/damage_target.gd" id="1_a244l"]
 [ext_resource type="Texture2D" uid="uid://7h7ujfkn4cf1" path="res://data/sprites/heart-01.png" id="1_ckgt5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cm4pufp573q80" path="res://data/sprites/heart-02.png" id="2_avh0e"]
 [ext_resource type="Material" uid="uid://caabkyh33pd4j" path="res://data/shader/NokiaMaterial.tres" id="4_od2jv"]
 [ext_resource type="Script" path="res://data/nodes/health.gd" id="4_og07a"]
+[ext_resource type="Script" path="res://data/scenes/FogOfWarRemover.gd" id="8_82ya3"]
 [ext_resource type="Material" uid="uid://yudv6e212hb6" path="res://data/shader/NokiaMaterial_Inverted.tres" id="8_r4edx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ql1n6"]
@@ -85,11 +86,13 @@ script = ExtResource("1_odn4d")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("4_od2jv")
 texture = ExtResource("1_ckgt5")
+centered = false
 
 [node name="DamageTarget2D" type="Area2D" parent="." groups=["DamageTarget"]]
 script = ExtResource("1_a244l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageTarget2D"]
+position = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_ql1n6")
 
 [node name="Health" type="Node" parent="."]
@@ -102,6 +105,9 @@ libraries = {
 "Animations": SubResource("AnimationLibrary_1j4qc")
 }
 autoplay = "heart_beat"
+
+[node name="FogOfWarRemover" type="Node2D" parent="."]
+script = ExtResource("8_82ya3")
 
 [connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]
 [connection signal="damaged" from="DamageTarget2D" to="Health" method="decrement_health"]

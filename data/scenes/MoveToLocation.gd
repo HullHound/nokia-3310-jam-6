@@ -8,6 +8,8 @@ extends State
 var enabled = false
 var time_since_last_movement = 0.0
 
+signal moved
+
 signal target_reached
 signal target_unreachable
 
@@ -51,3 +53,5 @@ func _physics_process(delta):
 	var next_path_position: Vector2 = Vector2i(navigation_agent.get_next_path_position()/ tile_size)*tile_size
 	
 	agent.global_position = next_path_position;
+	
+	moved.emit()
