@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2eqau2as3123"]
+
+[ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="1_4c0n5"]
+[ext_resource type="Texture2D" uid="uid://cmmm0310e7u05" path="res://data/sprites/selected_frame.tres" id="1_lrd7c"]
+[ext_resource type="Script" path="res://data/scenes/end_screen.gd" id="2_eiows"]
+[ext_resource type="Texture2D" uid="uid://bkxttviwrlcw1" path="res://data/sprites/default_button.tres" id="2_j0g2p"]
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_4c0n5")
+script = ExtResource("2_eiows")
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 84.0
+offset_bottom = 48.0
+color = Color(0, 0, 0, 1)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 84.0
+offset_bottom = 48.0
+texture = ExtResource("1_lrd7c")
+draw_center = false
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MessageText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 76.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "You have conquered this realm!"
+autowrap_mode = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 26.0
+offset_right = 75.0
+offset_bottom = 42.0
+texture = ExtResource("2_j0g2p")
+draw_center = false
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="ButtonText" type="Label" parent="NinePatchRect2"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 59.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Retry?"
+horizontal_alignment = 1
+autowrap_mode = 2

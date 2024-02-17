@@ -41,4 +41,3 @@ visible = false
 
 [connection signal="died" from="PlayerDungeonHeart" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="died" from="EnemyDungeonHeart" to="." method="_on_enemy_dungeon_heart_died"]
-[connection signal="restart_requested" from="UI/EndScreen" to="." method="_on_end_screen_restart_requested"]
