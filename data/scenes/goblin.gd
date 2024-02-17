@@ -15,6 +15,7 @@ signal died;
 func _ready() -> void:
 	$NavigationAgent2D.set_navigation_map(tilemap.get_layer_navigation_map(0))
 	$FogOfWarRemover.fog_of_war = fog_of_war
+	search_for_target.fog_of_war = fog_of_war
 	
 	search_for_target.target_found.connect(func(target): move_to_location.set_target(target.global_position); fsm.change_state(move_to_location))
 	#move_to_location.target_reached.connect(fsm.)
