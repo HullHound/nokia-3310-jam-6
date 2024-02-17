@@ -2,6 +2,10 @@ extends Node2D
 
 signal died;
 
+@export var team_id: int :
+	set(value):
+		$DamageTarget2D.team_id = value
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

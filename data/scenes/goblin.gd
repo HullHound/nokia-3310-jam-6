@@ -2,13 +2,26 @@ extends Node2D
 
 signal died;
 
+@export var tilemap: TileMap
+
+@onready var fsm: FiniteStateMachine = $FiniteStateMachine
+
+@onready var search_for_target: Node = $FiniteStateMachine/SearchForTarget
+@onready var move_to_location: Node = $FiniteStateMachine/MoveToLocation
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$NavigationAgent2D.set_navigation_map(tilemap.get_layer_navigation_map(0))
+	
+	search_for_target.target_found.connect(func(target): move_to_location.set_target(target.global_position); fsm.change_state(move_to_location))
+	#move_to_location.target_reached.connect(fsm.)
+	move_to_location.target_unreachable.connect(fsm.change_state.bind(search_for_target))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_released("ui_down"):
+		$FiniteStateMachine/MoveToLocation.set_target(Vector2(8*6,0))
 
 func die():
 	died.emit()

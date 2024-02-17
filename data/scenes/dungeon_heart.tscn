@@ -86,11 +86,10 @@ script = ExtResource("1_odn4d")
 material = ExtResource("4_od2jv")
 texture = ExtResource("1_ckgt5")
 
-[node name="DamageTarget2D" type="Area2D" parent="."]
+[node name="DamageTarget2D" type="Area2D" parent="." groups=["DamageTarget"]]
 script = ExtResource("1_a244l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageTarget2D"]
-visible = false
 shape = SubResource("RectangleShape2D_ql1n6")
 
 [node name="Health" type="Node" parent="."]
