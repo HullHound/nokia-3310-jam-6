@@ -34,10 +34,12 @@ func pick_claim_target():
 		# Check Connected to a currently walkable Tile
 		var adjacent_to_walkable_tile = false
 		var surroundingTiles = tilemap.get_surrounding_cells(item)
+		var walkable_neighbour = null
 		for neighbour in surroundingTiles:
 			var type = tilemap.get_cell_tile_data(0, neighbour)
 			if type.get_custom_data('Walkable') == true:
 				adjacent_to_walkable_tile = true
+				walkable_neighbour = neighbour
 				break;
 		
 		if !adjacent_to_walkable_tile:
@@ -46,7 +48,7 @@ func pick_claim_target():
 		# TODO - Distance Check - prioritise closer? / Closer to Dungeon Heart?
 		
 		
-		target = item
+		target = walkable_neighbour
 		
 	if target != null:
 		target_found.emit(tilemap.map_to_local(target))
