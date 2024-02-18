@@ -70,7 +70,6 @@ radius = 8.0
 neighbor_distance = 16.0
 time_horizon_agents = 2.0
 max_speed = 16.0
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0.952941, 0.164706, 0.584314, 1)
 

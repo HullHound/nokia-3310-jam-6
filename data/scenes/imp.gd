@@ -66,3 +66,7 @@ func _on_damage_target_2d_damaged(damage_amount: float) -> void:
 	$AnimationPlayer.play("damaged")
 	health.decrement_health(damage_amount)
 	
+
+
+func _on_mine_gold_mined() -> void:
+	print("gold Mined")

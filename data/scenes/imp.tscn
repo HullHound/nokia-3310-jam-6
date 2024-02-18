@@ -161,7 +161,7 @@ state = NodePath("SearchForMineTarget")
 
 [node name="SearchForMineTarget" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("8_34mra")
-mineable_source_ids = Array[Vector2i]([Vector2i(6, 0)])
+mineable_source_ids = Array[Vector2i]([Vector2i(6, 0), Vector2i(13, 0)])
 
 [node name="SearchForClaimTarget" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("12_tpm0u")
@@ -212,3 +212,4 @@ libraries = {
 [connection signal="moved" from="FiniteStateMachine/MoveToClaimTarget" to="FogOfWarRemover" method="remove_fog_of_war"]
 [connection signal="moved" from="FiniteStateMachine/MoveToMineTarget" to="FogOfWarRemover" method="remove_fog_of_war"]
 [connection signal="moved" from="FiniteStateMachine/MoveNearby" to="FogOfWarRemover" method="remove_fog_of_war"]
+[connection signal="gold_mined" from="FiniteStateMachine/Mine" to="." method="_on_mine_gold_mined"]

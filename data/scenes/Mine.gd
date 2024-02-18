@@ -11,6 +11,7 @@ extends State
 var enabled = false
 var current_mine_time = 0.0
 
+signal gold_mined
 signal finished
 
 # Called when the node enters the scene tree for the first time.
@@ -38,5 +39,10 @@ func _physics_process(delta: float) -> void:
 	
 	if current_mine_time >= time_to_mine:
 		var position = tilemap.local_to_map(target_tile)
+		var tile_type = tilemap.get_cell_tile_data(0, position)
 		tilemap.set_cell(0, position, tilemap_source_id, ground_source_id)
+		
+		if tile_type.get_custom_data("Gold"):
+			gold_mined.emit()
+		
 		finished.emit()
