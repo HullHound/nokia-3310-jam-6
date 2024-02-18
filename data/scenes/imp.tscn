@@ -158,8 +158,8 @@ state = NodePath("SearchForClaimTarget")
 
 [node name="SearchForClaimTarget" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("12_tpm0u")
-claimed_source_id = Vector2i(8, 0)
-claimable_source_ids = Array[Vector2i]([Vector2i(4, 0)])
+claimed_source_id = Vector2i(2, 0)
+claimable_source_ids = Array[Vector2i]([Vector2i(3, 0), Vector2i(5, 0)])
 
 [node name="MoveToClaimTarget" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent", "navigation_agent")]
 script = ExtResource("9_w8esl")
@@ -175,7 +175,7 @@ movement_delay = 3.0
 [node name="Claim" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent", "claim_overlay_player")]
 script = ExtResource("13_ykhsw")
 agent = NodePath("../..")
-claimed_source_id = Vector2i(8, 0)
+claimed_source_id = Vector2i(2, 0)
 claim_overlay_player = NodePath("../../ClaimOverlayPlayer")
 
 [node name="FogOfWarRemover" type="Node2D" parent="."]

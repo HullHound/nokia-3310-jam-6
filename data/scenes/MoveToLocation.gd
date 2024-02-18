@@ -19,7 +19,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func set_target(location: Vector2):
-	navigation_agent.target_position = location
+	navigation_agent.target_position = to_nearest_tile(location)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -31,6 +31,9 @@ func _enter_state() -> void:
 
 func _exit_state() -> void:
 	enabled = false
+	
+func to_nearest_tile(location: Vector2):
+	return Vector2i(location / tile_size)*tile_size
 
 func _physics_process(delta):
 	time_since_last_movement += delta;
@@ -51,7 +54,7 @@ func _physics_process(delta):
 	
 	time_since_last_movement = 0
 
-	var next_path_position: Vector2 = Vector2i(navigation_agent.get_next_path_position()/ tile_size)*tile_size
+	var next_path_position: Vector2 = to_nearest_tile(navigation_agent.get_next_path_position())
 	
 	agent.global_position = next_path_position;
 	

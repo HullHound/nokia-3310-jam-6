@@ -56,6 +56,9 @@ func pick_claim_target():
 		target = item
 		
 	if target != null:
+		print('ad')
+		print(target)
+		print(tilemap.map_to_local(target))
 		target_found.emit(tilemap.map_to_local(target))
 	elif target == null:
 		no_target_found.emit()
