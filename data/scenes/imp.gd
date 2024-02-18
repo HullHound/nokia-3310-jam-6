@@ -8,11 +8,17 @@ signal died;
 
 @onready var fsm: FiniteStateMachine = $FiniteStateMachine
 
+
+@onready var search_for_mine_target: Node = $FiniteStateMachine/SearchForMineTarget
+
 @onready var search_for_claim_target: Node = $FiniteStateMachine/SearchForClaimTarget
 @onready var move_to_claim_target: Node = $FiniteStateMachine/MoveToClaimTarget
+@onready var move_to_mine_target: MoveToLocationState = $FiniteStateMachine/MoveToMineTarget
+
 @onready var attack: Node = $FiniteStateMachine/Attack
 @onready var move_nearby: Node = $FiniteStateMachine/MoveNearby
 @onready var claim: Node = $FiniteStateMachine/Claim
+@onready var mine: Node = $FiniteStateMachine/Mine
 
 @onready var health: Health = $Health
 
@@ -24,7 +30,14 @@ func _ready() -> void:
 	$FogOfWarRemover.fog_of_war = fog_of_war
 	search_for_claim_target.fog_of_war = fog_of_war
 	search_for_claim_target.tilemap = tilemap
+	search_for_mine_target.tilemap = tilemap
 	claim.tilemap = tilemap
+	
+	search_for_mine_target.target_found.connect(func(target): move_to_mine_target.set_target(target); fsm.change_state(move_to_mine_target))
+	search_for_mine_target.no_target_found.connect(fsm.change_state.bind(search_for_claim_target))
+	
+	move_to_mine_target.target_reached.connect(fsm.change_state.bind(mine))
+	move_to_mine_target.target_unreachable.connect(fsm.change_state.bind(search_for_mine_target))
 	
 	search_for_claim_target.target_found.connect(func(target): move_to_claim_target.set_target(target); fsm.change_state(move_to_claim_target))
 	search_for_claim_target.no_target_found.connect(fsm.change_state.bind(move_nearby))

@@ -1,9 +1,7 @@
 extends State
 
 @export var tilemap: TileMap
-@export var fog_of_war: TileMap
-@export var claimed_source_id: Vector2i
-@export var claimable_source_ids: Array[Vector2i]
+@export var mineable_source_ids: Array[Vector2i]
 
 signal target_found(target: Vector2)
 signal no_target_found
@@ -27,27 +25,22 @@ func _physics_process(delta: float) -> void:
 func pick_claim_target():
 	var potentialTargets: Array[Vector2i] = []
 	
-	for type in claimable_source_ids:
-		if claimed_source_id == type:
-			continue;
-			
+	for type in mineable_source_ids:			
 		potentialTargets.append_array(tilemap.get_used_cells_by_id(0, -1, type))
 	
 	var target = null
-	for item in potentialTargets:		
-		if fog_of_war.get_cell_source_id(0, item) != -1:
-			continue;
-			
-		# Check Connected to a currently Claimed Tile
-		var adjacent_to_claimed_tile = false
+	for item in potentialTargets:	
+		
+		# Check Connected to a currently walkable Tile
+		var adjacent_to_walkable_tile = false
 		var surroundingTiles = tilemap.get_surrounding_cells(item)
 		for neighbour in surroundingTiles:
-			var type = tilemap.get_cell_atlas_coords(0, neighbour)
-			if type == claimed_source_id:
-				adjacent_to_claimed_tile = true
+			var type = tilemap.get_cell_tile_data(0, neighbour)
+			if type.get_custom_data('Walkable') == true:
+				adjacent_to_walkable_tile = true
 				break;
 		
-		if !adjacent_to_claimed_tile:
+		if !adjacent_to_walkable_tile:
 			continue;
 			
 		# TODO - Distance Check - prioritise closer? / Closer to Dungeon Heart?

@@ -160,7 +160,6 @@ state = NodePath("SearchForMineTarget")
 
 [node name="SearchForMineTarget" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("8_34mra")
-mineable_source_ids = Array[Vector2i]([Vector2i(6, 0)])
 
 [node name="SearchForClaimTarget" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("12_tpm0u")
