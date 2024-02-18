@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b1fvhdp4123lx"]
+[gd_scene load_steps=18 format=3 uid="uid://b1fvhdp4123lx"]
 
 [ext_resource type="Script" path="res://data/scenes/goblin.gd" id="1_ds06r"]
 [ext_resource type="Texture2D" uid="uid://bxneset5fpjyn" path="res://data/sprites/1 Bit Adventure Pack.png" id="1_s55wf"]
@@ -8,8 +8,10 @@
 [ext_resource type="Material" uid="uid://yudv6e212hb6" path="res://data/shader/NokiaMaterial_Inverted.tres" id="6_lfl15"]
 [ext_resource type="Script" path="res://data/heartBeast/FiniteStateMachine/finite_state_machine.gd" id="7_7lavw"]
 [ext_resource type="Script" path="res://data/scenes/SearchForTarget.gd" id="8_1r0vn"]
-[ext_resource type="Script" path="res://data/scenes/MoveToLocation.gd" id="8_yaefl"]
+[ext_resource type="Script" path="res://data/scenes/MoveToTarget.gd" id="9_pir2q"]
 [ext_resource type="Script" path="res://data/scenes/FogOfWarRemover.gd" id="10_rhsyp"]
+[ext_resource type="Script" path="res://data/scenes/Attack.gd" id="10_yny8l"]
+[ext_resource type="Script" path="res://data/scenes/MoveNearby.gd" id="12_kxt5x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jmu6x"]
 atlas = ExtResource("1_s55wf")
@@ -95,17 +97,24 @@ state = NodePath("SearchForTarget")
 [node name="SearchForTarget" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("8_1r0vn")
 
-[node name="MoveToLocation" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent", "navigation_agent")]
-script = ExtResource("8_yaefl")
+[node name="MoveToTarget" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent", "navigation_agent")]
+script = ExtResource("9_pir2q")
 agent = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
-movement_delay = 1.0
 
-[node name="Node" type="Node" parent="FiniteStateMachine"]
+[node name="Attack" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("10_yny8l")
+
+[node name="MoveNearby" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent", "navigation_agent")]
+script = ExtResource("12_kxt5x")
+agent = NodePath("../..")
+navigation_agent = NodePath("../../NavigationAgent2D")
+movement_delay = 3.0
 
 [node name="FogOfWarRemover" type="Node2D" parent="."]
 script = ExtResource("10_rhsyp")
 
 [connection signal="died" from="Health" to="." method="die"]
 [connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]
-[connection signal="moved" from="FiniteStateMachine/MoveToLocation" to="FogOfWarRemover" method="remove_fog_of_war"]
+[connection signal="moved" from="FiniteStateMachine/MoveToTarget" to="FogOfWarRemover" method="remove_fog_of_war"]
+[connection signal="moved" from="FiniteStateMachine/MoveNearby" to="FogOfWarRemover" method="remove_fog_of_war"]

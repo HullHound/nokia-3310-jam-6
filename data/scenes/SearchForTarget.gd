@@ -4,6 +4,7 @@ extends State
 @export var fog_of_war: TileMap
 
 signal target_found(target: DamageTarget2D)
+signal no_target_found
 
 var enabled = false
 
@@ -35,3 +36,6 @@ func _physics_process(delta: float) -> void:
 		
 	if target != null:
 		target_found.emit(target)	
+	elif target == null:
+		no_target_found.emit()
+		

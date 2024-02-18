@@ -1,8 +1,9 @@
 extends State
+class_name MoveToLocationState
 
 @export var agent: Node2D
 @export var navigation_agent: NavigationAgent2D
-@export var movement_delay: float
+@export var movement_delay: float = 1
 @export var tile_size:int = 8
 
 var enabled = false
