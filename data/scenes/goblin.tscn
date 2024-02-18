@@ -66,9 +66,6 @@ target_desired_distance = 12.0
 path_max_distance = 16.0
 avoidance_enabled = true
 radius = 8.0
-debug_enabled = true
-debug_use_custom = true
-debug_path_custom_color = Color(1, 0.396078, 1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("2_pw8f0")
