@@ -14,5 +14,5 @@ func set_destination():
 		goalY = randi_range(-1, 1) * tile_size
 	
 	var destination = agent.global_position + Vector2(goalX, goalY)
-	print(destination)
+	
 	set_target(destination)
