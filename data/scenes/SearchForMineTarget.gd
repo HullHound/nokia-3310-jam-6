@@ -47,8 +47,8 @@ func pick_claim_target():
 			
 		# TODO - Distance Check - prioritise closer? / Closer to Dungeon Heart?
 		
-		
-		target = walkable_neighbour
+		target = item
+		#target = walkable_neighbour
 		
 	if target != null:
 		target_found.emit(tilemap.map_to_local(target))

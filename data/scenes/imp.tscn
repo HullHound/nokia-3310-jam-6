@@ -66,7 +66,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ClaimOverlay:texture")
+tracks/0/path = NodePath("Overlay:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -78,7 +78,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ClaimOverlay:material")
+tracks/1/path = NodePath("Overlay:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -93,7 +93,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ClaimOverlay:texture")
+tracks/0/path = NodePath("Overlay:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -105,7 +105,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ClaimOverlay:material")
+tracks/1/path = NodePath("Overlay:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -184,23 +184,25 @@ agent = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
 movement_delay = 3.0
 
-[node name="Claim" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent", "claim_overlay_player")]
+[node name="Claim" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent", "overlay_player")]
 script = ExtResource("13_ykhsw")
 agent = NodePath("../..")
 claimed_source_id = Vector2i(2, 0)
-claim_overlay_player = NodePath("../../ClaimOverlayPlayer")
+overlay_player = NodePath("../../OverlayPlayer")
 
-[node name="Mine" type="Node" parent="FiniteStateMachine"]
+[node name="Mine" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("overlay_player")]
 script = ExtResource("13_rcxdl")
+ground_source_id = Vector2i(5, 0)
+overlay_player = NodePath("../../OverlayPlayer")
 
 [node name="FogOfWarRemover" type="Node2D" parent="."]
 script = ExtResource("12_pwx5h")
 
-[node name="ClaimOverlay" type="Sprite2D" parent="."]
+[node name="Overlay" type="Sprite2D" parent="."]
 material = ExtResource("2_3bvpw")
 centered = false
 
-[node name="ClaimOverlayPlayer" type="AnimationPlayer" parent="."]
+[node name="OverlayPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_2pbj4")
 }

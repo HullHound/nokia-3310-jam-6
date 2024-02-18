@@ -32,8 +32,9 @@ func _ready() -> void:
 	search_for_claim_target.tilemap = tilemap
 	search_for_mine_target.tilemap = tilemap
 	claim.tilemap = tilemap
+	mine.tilemap = tilemap
 	
-	search_for_mine_target.target_found.connect(func(target): move_to_mine_target.set_target(target); fsm.change_state(move_to_mine_target))
+	search_for_mine_target.target_found.connect(func(target): move_to_mine_target.set_target(target); mine.target_tile = target; fsm.change_state(move_to_mine_target))
 	search_for_mine_target.no_target_found.connect(fsm.change_state.bind(search_for_claim_target))
 	
 	move_to_mine_target.target_reached.connect(fsm.change_state.bind(mine))
@@ -48,7 +49,8 @@ func _ready() -> void:
 	move_nearby.target_reached.connect(fsm.change_state.bind(search_for_claim_target))
 	move_nearby.target_unreachable.connect(fsm.change_state.bind(search_for_claim_target))
 
-	claim.finished.connect(fsm.change_state.bind(search_for_claim_target))
+	claim.finished.connect(fsm.change_state.bind(search_for_mine_target))
+	mine.finished.connect(fsm.change_state.bind(search_for_mine_target))
 
 	$FogOfWarRemover.remove_fog_of_war()
 
