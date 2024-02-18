@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcl1afttwhcy1"]
+[gd_scene load_steps=15 format=3 uid="uid://bcl1afttwhcy1"]
 
 [ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_3orjx"]
 [ext_resource type="PackedScene" uid="uid://b7cgghr4mk2pa" path="res://data/scenes/dungeon_heart.tscn" id="3_osh5k"]
 [ext_resource type="Texture2D" uid="uid://3kaxeibpd04n" path="res://data/sprites/pixilart-sprite.png" id="3_y33ga"]
 [ext_resource type="Script" path="res://data/scenes/Game.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://d2eqau2as3123" path="res://data/scenes/end_screen.tscn" id="4_q48f5"]
+[ext_resource type="PackedScene" uid="uid://b1fvhdp4123lx" path="res://data/scenes/goblin.tscn" id="5_7sdhw"]
 [ext_resource type="PackedScene" uid="uid://cb0mhr55ehsbc" path="res://data/scenes/imp.tscn" id="6_xplqg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_y4xj0"]
@@ -97,12 +98,25 @@ layer_0/tile_data = PackedInt32Array(131076, 65539, 0, 131077, 327683, 0, 0, 327
 position = Vector2(8, 32)
 fog_of_war = NodePath("../FogOfWar")
 
+[node name="PlayerDungeonHeart2" parent="." node_paths=PackedStringArray("fog_of_war") instance=ExtResource("3_osh5k")]
+position = Vector2(32, 24)
+fog_of_war = NodePath("../FogOfWar")
+
+[node name="PlayerDungeonHeart3" parent="." node_paths=PackedStringArray("fog_of_war") instance=ExtResource("3_osh5k")]
+position = Vector2(40, 24)
+fog_of_war = NodePath("../FogOfWar")
+
 [node name="EnemyDungeonHeart" parent="." node_paths=PackedStringArray("fog_of_war") instance=ExtResource("3_osh5k")]
 position = Vector2(72, 32)
 team_id = 1
 fog_of_war = NodePath("../FogOfWar")
 
 [node name="Imp" parent="." node_paths=PackedStringArray("tilemap", "fog_of_war") instance=ExtResource("6_xplqg")]
+tilemap = NodePath("../TileMap")
+fog_of_war = NodePath("../FogOfWar")
+
+[node name="Goblin" parent="." node_paths=PackedStringArray("tilemap", "fog_of_war") instance=ExtResource("5_7sdhw")]
+position = Vector2(0, 8)
 tilemap = NodePath("../TileMap")
 fog_of_war = NodePath("../FogOfWar")
 
@@ -123,5 +137,7 @@ theme = ExtResource("2_3orjx")
 visible = false
 
 [connection signal="died" from="PlayerDungeonHeart" to="." method="_on_player_dungeon_heart_died"]
+[connection signal="died" from="PlayerDungeonHeart2" to="." method="_on_player_dungeon_heart_died"]
+[connection signal="died" from="PlayerDungeonHeart3" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="died" from="EnemyDungeonHeart" to="." method="_on_enemy_dungeon_heart_died"]
 [connection signal="restart_requested" from="UI/EndScreen" to="." method="_on_end_screen_restart_requested"]

@@ -55,7 +55,7 @@ func _physics_process(delta):
 	time_since_last_movement = 0
 
 	var next_path_position: Vector2 = to_nearest_tile(navigation_agent.get_next_path_position())
-	
+		
 	agent.global_position = next_path_position;
 	
 	moved.emit()

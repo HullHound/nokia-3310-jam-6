@@ -1,13 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://batsrvn1urri5"]
+[gd_scene load_steps=3 format=3 uid="uid://batsrvn1urri5"]
 
 [ext_resource type="PackedScene" uid="uid://bcl1afttwhcy1" path="res://data/scenes/Game.tscn" id="1"]
-[ext_resource type="Shader" path="res://data/shader/OrderedDither.gdshader" id="1_4lj7c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_80ln0"]
-shader = ExtResource("1_4lj7c")
-shader_parameter/ColorLight = Color(0.780392, 0.941176, 0.847059, 1)
-shader_parameter/ColorDark = Color(0.262745, 0.321569, 0.239216, 1)
-shader_parameter/invert = false
 
 [node name="Main" type="Node"]
 
