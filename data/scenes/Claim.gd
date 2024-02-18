@@ -3,6 +3,7 @@ extends State
 @export var agent: Node2D
 @export var tilemap: TileMap
 @export var claimed_source_id: Vector2i
+@export var claim_overlay_player: AnimationPlayer
 
 @export var time_to_claim: float = 3.0
 
@@ -23,6 +24,7 @@ func _process(delta: float) -> void:
 func _enter_state() -> void:
 	enabled = true	
 	current_claim_time = 0.0
+	claim_overlay_player.play("claim")
 
 func _exit_state() -> void:
 	enabled = false

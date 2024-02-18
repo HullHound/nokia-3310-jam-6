@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cb0mhr55ehsbc"]
+[gd_scene load_steps=22 format=3 uid="uid://cb0mhr55ehsbc"]
 
 [ext_resource type="Script" path="res://data/scenes/imp.gd" id="1_b2iwc"]
 [ext_resource type="Material" uid="uid://caabkyh33pd4j" path="res://data/shader/NokiaMaterial.tres" id="2_3bvpw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://data/scenes/MoveNearby.gd" id="11_ob580"]
 [ext_resource type="Script" path="res://data/scenes/FogOfWarRemover.gd" id="12_pwx5h"]
 [ext_resource type="Script" path="res://data/scenes/SearchForClaimTarget.gd" id="12_tpm0u"]
+[ext_resource type="Texture2D" uid="uid://dfvdh4wr04crh" path="res://data/sprites/tiles/claim-border.png" id="13_l7oc8"]
 [ext_resource type="Script" path="res://data/scenes/Claim.gd" id="13_ykhsw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jmu6x"]
@@ -55,6 +56,67 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_80uq6"),
 "damaged": SubResource("Animation_fgv7d")
+}
+
+[sub_resource type="Animation" id="Animation_kb0gx"]
+resource_name = "claim"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ClaimOverlay:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("13_l7oc8"), null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ClaimOverlay:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_3bvpw"), ExtResource("6_ot5jj"), ExtResource("2_3bvpw"), ExtResource("6_ot5jj"), ExtResource("2_3bvpw"), ExtResource("6_ot5jj"), ExtResource("2_3bvpw"), ExtResource("6_ot5jj"), ExtResource("2_3bvpw"), ExtResource("6_ot5jj"), ExtResource("2_3bvpw"), ExtResource("6_ot5jj"), ExtResource("2_3bvpw"), ExtResource("6_ot5jj"), ExtResource("2_3bvpw"), ExtResource("2_3bvpw")]
+}
+
+[sub_resource type="Animation" id="Animation_vbuvi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ClaimOverlay:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ClaimOverlay:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_3bvpw")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2pbj4"]
+_data = {
+"RESET": SubResource("Animation_vbuvi"),
+"claim": SubResource("Animation_kb0gx")
 }
 
 [node name="Imp" type="Node2D"]
@@ -110,13 +172,23 @@ agent = NodePath("../..")
 navigation_agent = NodePath("../../NavigationAgent2D")
 movement_delay = 3.0
 
-[node name="Claim" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]
+[node name="Claim" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent", "claim_overlay_player")]
 script = ExtResource("13_ykhsw")
 agent = NodePath("../..")
 claimed_source_id = Vector2i(8, 0)
+claim_overlay_player = NodePath("../../ClaimOverlayPlayer")
 
 [node name="FogOfWarRemover" type="Node2D" parent="."]
 script = ExtResource("12_pwx5h")
+
+[node name="ClaimOverlay" type="Sprite2D" parent="."]
+material = ExtResource("2_3bvpw")
+centered = false
+
+[node name="ClaimOverlayPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2pbj4")
+}
 
 [connection signal="died" from="Health" to="." method="die"]
 [connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]
