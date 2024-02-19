@@ -86,6 +86,10 @@ func getPath(start: Vector2, destination: Vector2):
 
 	return output
 	
+	
+func setSolid(location: Vector2, solid: bool = true):
+	var tile = tileMap.local_to_map(location)
+	astar_grid.set_point_solid(tile, solid)
 #func getDistance(start: Vector2, destination: Vector2):
 	#return getPath(start, destination).size()
 	

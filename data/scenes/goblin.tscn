@@ -84,7 +84,6 @@ script = ExtResource("2_hmy46")
 script = ExtResource("4_hlm0u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageTarget2D"]
-position = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_1e5q4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

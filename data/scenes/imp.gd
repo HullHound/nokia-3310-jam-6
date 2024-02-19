@@ -50,7 +50,8 @@ func _ready() -> void:
 	claim.finished.connect(fsm.change_state.bind(search_for_mine_target))
 	mine.finished.connect(fsm.change_state.bind(search_for_mine_target))
 
-	$FogOfWarRemover.remove_fog_of_war()
+	$FogOfWarRemover.remove_fog_of_war()	
+	game_map.setSolid(global_position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

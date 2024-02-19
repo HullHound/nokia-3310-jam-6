@@ -53,8 +53,9 @@ func _physics_process(delta):
 		return
 	
 	time_since_last_movement = 0
-	
-	agent.global_position = path[1];
+	game_map.setSolid(agent.global_position, false)
+	agent.global_position = path[1];	
+	game_map.setSolid(agent.global_position, true)
 	
 	moved.emit()
 	

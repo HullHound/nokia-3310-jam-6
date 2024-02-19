@@ -2,7 +2,7 @@ extends MoveToLocationState
 class_name MoveToLocationState_Adjacent
 
 func isAtEndOfPath():
-	return getPathToDestination().size() <= 1;
+	return getPathToDestination().size() == 1;
 	
 func getPathToDestination():
 	# Calculate the Closest Adjacent Cell to get to

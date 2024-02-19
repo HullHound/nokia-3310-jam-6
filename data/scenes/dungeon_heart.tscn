@@ -83,9 +83,6 @@ _data = {
 [node name="DungeonHeart" type="Node2D"]
 script = ExtResource("1_odn4d")
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-vertices = PackedVector2Array(0, 0, 8, 0, 8, 8, 0, 8)
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("4_od2jv")
 texture = ExtResource("1_ckgt5")
@@ -94,7 +91,6 @@ texture = ExtResource("1_ckgt5")
 script = ExtResource("1_a244l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageTarget2D"]
-position = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_ql1n6")
 
 [node name="Health" type="Node" parent="."]
