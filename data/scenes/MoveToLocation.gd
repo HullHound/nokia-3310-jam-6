@@ -2,12 +2,12 @@ extends State
 class_name MoveToLocationState
 
 @export var agent: Node2D
-@export var navigation_agent: NavigationAgent2D
+@export var game_map: GameMap2D
 @export var movement_delay: float = 1
-@export var tile_size:int = 8
 
 var enabled = false
 var time_since_last_movement = 0.0
+var destination: Vector2
 
 signal moved
 
@@ -19,7 +19,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func set_target(location: Vector2):
-	navigation_agent.target_position = to_nearest_tile(location)
+	destination = location
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -31,31 +31,37 @@ func _enter_state() -> void:
 
 func _exit_state() -> void:
 	enabled = false
-	
-func to_nearest_tile(location: Vector2):
-	return Vector2i(location / tile_size)*tile_size
 
 func _physics_process(delta):
 	time_since_last_movement += delta;
 	
 	if !enabled:
 		return
-	
-	if navigation_agent.is_navigation_finished():
-		target_reached.emit()
-		return 
 		
-	if !navigation_agent.is_target_reachable():
+	
+	if isAtEndOfPath():
+		target_reached.emit()
+		return
+	
+	var path = getPathToDestination()
+	
+	if path.size() <= 1:
 		target_unreachable.emit()
 		return
-		
+	
 	if time_since_last_movement < movement_delay:
 		return
 	
 	time_since_last_movement = 0
-
-	var next_path_position: Vector2 = to_nearest_tile(navigation_agent.get_next_path_position())
-		
-	agent.global_position = next_path_position;
+	print(path)
+	agent.global_position = path[1];
 	
 	moved.emit()
+	
+func isAtEndOfPath():
+	var position = agent.global_position
+	return game_map.areLocationsTheSame(position, destination)
+	
+func getPathToDestination():
+	var position = agent.global_position
+	return game_map.getPath(position, destination);

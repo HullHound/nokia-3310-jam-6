@@ -1,12 +1,13 @@
 extends State
 
-@export var tilemap: TileMap
-@export var mineable_source_ids: Array[Vector2i]
+@export var agent: Node2D
+@export var game_map: GameMap2D
 
 signal target_found(target: Vector2)
 signal no_target_found
 
 var enabled = false
+var search_property = "toBeMined"
 
 func _enter_state() -> void:
 	enabled = true
@@ -23,35 +24,21 @@ func _physics_process(delta: float) -> void:
 	pick_claim_target()
 	
 func pick_claim_target():
-	var potentialTargets: Array[Vector2i] = []
-	
-	for type in mineable_source_ids:			
-		potentialTargets.append_array(tilemap.get_used_cells_by_id(0, -1, type))
+	var potentialTargets: PackedVector2Array = game_map.getTilesWithProperty(search_property)
 	
 	var target = null
-	for item in potentialTargets:	
-		
-		# Check Connected to a currently walkable Tile
-		var adjacent_to_walkable_tile = false
-		var surroundingTiles = tilemap.get_surrounding_cells(item)
-		var walkable_neighbour = null
-		for neighbour in surroundingTiles:
-			var type = tilemap.get_cell_tile_data(0, neighbour)
-			if type.get_custom_data('Walkable') == true:
-				adjacent_to_walkable_tile = true
-				walkable_neighbour = neighbour
-				break;
-		
-		if !adjacent_to_walkable_tile:
-			continue;
+	for item in potentialTargets:
+		# Check can be reached
+		if game_map.getPath(agent.global_position, item).size() <= 1:
+			continue
 			
 		# TODO - Distance Check - prioritise closer? / Closer to Dungeon Heart?
 		
 		target = item
-		#target = walkable_neighbour
 		
 	if target != null:
-		target_found.emit(tilemap.map_to_local(target))
+		print('mine target found')
+		target_found.emit(target)
 	elif target == null:
 		no_target_found.emit()
 		

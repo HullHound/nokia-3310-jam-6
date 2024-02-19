@@ -127,6 +127,7 @@ script = ExtResource("1_b2iwc")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("2_3bvpw")
 texture = SubResource("AtlasTexture_jmu6x")
+centered = false
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_jt7pj")
@@ -184,6 +185,7 @@ script = ExtResource("12_pwx5h")
 
 [node name="Overlay" type="Sprite2D" parent="."]
 material = ExtResource("2_3bvpw")
+centered = false
 
 [node name="OverlayPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -194,4 +196,5 @@ libraries = {
 [connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]
 [connection signal="moved" from="FiniteStateMachine/MoveToClaimTarget" to="FogOfWarRemover" method="remove_fog_of_war"]
 [connection signal="moved" from="FiniteStateMachine/MoveToMineTarget" to="FogOfWarRemover" method="remove_fog_of_war"]
+[connection signal="moved" from="FiniteStateMachine/MoveNearby" to="FogOfWarRemover" method="remove_fog_of_war"]
 [connection signal="gold_mined" from="FiniteStateMachine/Mine" to="." method="_on_mine_gold_mined"]

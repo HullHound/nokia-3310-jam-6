@@ -1,14 +1,17 @@
 extends State
 
-@export var tilemap: TileMap
-@export var fog_of_war: TileMap
+@export var game_map: GameMap2D
 @export var claimed_source_id: Vector2i
 @export var claimable_source_ids: Array[Vector2i]
+
+@export var claimTile: GameMap2D.TileType
 
 signal target_found(target: Vector2)
 signal no_target_found
 
 var enabled = false
+@export var search_property = "couldBeClaimed_Player"
+@export var neighbour_property = "claimedPlayer"
 
 func _enter_state() -> void:
 	enabled = true
@@ -25,25 +28,19 @@ func _physics_process(delta: float) -> void:
 	pick_claim_target()
 	
 func pick_claim_target():
-	var potentialTargets: Array[Vector2i] = []
-	
-	for type in claimable_source_ids:
-		if claimed_source_id == type:
-			continue;
-			
-		potentialTargets.append_array(tilemap.get_used_cells_by_id(0, -1, type))
-	
+	var potentialTargets: PackedVector2Array = game_map.getTilesWithProperty(search_property)
+
 	var target = null
-	for item in potentialTargets:		
-		if fog_of_war.get_cell_source_id(0, item) != -1:
-			continue;
-			
+	for item in potentialTargets:
+		#if !game_map.isVisible(item):
+		#	continue;
+		
 		# Check Connected to a currently Claimed Tile
 		var adjacent_to_claimed_tile = false
-		var surroundingTiles = tilemap.get_surrounding_cells(item)
+		var surroundingTiles = game_map.getNeighbours(item)
 		for neighbour in surroundingTiles:
-			var type = tilemap.get_cell_atlas_coords(0, neighbour)
-			if type == claimed_source_id:
+			var type: GameMap2D.GameTileData = game_map.getTileData(neighbour)
+			if type[neighbour_property]:
 				adjacent_to_claimed_tile = true
 				break;
 		
@@ -52,12 +49,11 @@ func pick_claim_target():
 			
 		# TODO - Distance Check - prioritise closer? / Closer to Dungeon Heart?
 		
-		
 		target = item
-		
+	
 	if target != null:
-		target_found.emit(tilemap.map_to_local(target))
-	elif target == null:
+		target_found.emit(target)
+	else:
 		no_target_found.emit()
 		
 

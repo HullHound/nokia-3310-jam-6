@@ -1,12 +1,11 @@
 extends State
 
 @export var agent: Node2D
-@export var tilemap: TileMap
-@export var tilemap_source_id = 3
-@export var claimed_source_id: Vector2i
+@export var game_map: GameMap2D
 @export var overlay_player: AnimationPlayer
 
 @export var time_to_claim: float = 3.0
+@export var claim_type: GameMap2D.TileType = GameMap2D.TileType.ClaimedPlayer
 
 var enabled = false
 var current_claim_time = 0.0
@@ -37,6 +36,5 @@ func _physics_process(delta: float) -> void:
 	current_claim_time += delta
 	
 	if current_claim_time >= time_to_claim:
-		var position = tilemap.local_to_map(agent.global_position)
-		tilemap.set_cell(0, position, tilemap_source_id, claimed_source_id)
+		game_map.setTile(agent.global_position, claim_type)
 		finished.emit()

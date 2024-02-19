@@ -1,7 +1,7 @@
 extends State
 
 @export var target_tile: Vector2
-@export var tilemap: TileMap
+@export var game_map: GameMap2D
 @export var tilemap_source_id = 3
 @export var ground_source_id: Vector2i
 @export var overlay_player: AnimationPlayer
@@ -38,11 +38,10 @@ func _physics_process(delta: float) -> void:
 	current_mine_time += delta
 	
 	if current_mine_time >= time_to_mine:
-		var position = tilemap.local_to_map(target_tile)
-		var tile_type = tilemap.get_cell_tile_data(0, position)
-		tilemap.set_cell(0, position, tilemap_source_id, ground_source_id)
+		var tileData = game_map.getTileData(target_tile)
+		game_map.clearTile(target_tile)
 		
-		if tile_type.get_custom_data("Gold"):
+		if tileData.containsGold:
 			gold_mined.emit()
 		
 		finished.emit()

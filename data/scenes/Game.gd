@@ -6,8 +6,7 @@ func _ready() -> void:
 	AudioManager.play_music(music)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_released("jump"):
-		$EnemyDungeonHeart/DamageTarget2D.damage(1)
+	pass
 	
 func _on_player_dungeon_heart_died() -> void:
 	print('player died')

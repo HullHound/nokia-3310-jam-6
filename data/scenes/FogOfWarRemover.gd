@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var fog_of_war: TileMap
+@export var game_map: GameMap2D
+@export var tile_size = 8
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,10 +13,9 @@ func _process(delta: float) -> void:
 	pass
 
 func remove_fog_of_war():
-	var current_tile = fog_of_war.local_to_map(global_position)
-	var surroundingCells = fog_of_war.get_surrounding_cells(current_tile)
+	var current_tile = global_position
 	
-	for x in range(current_tile.x -1, current_tile.x + 2, 1):
-		for y in range(current_tile.y -1, current_tile.y + 2, 1):
-			var coords: Vector2i = Vector2i(x,y)
-			fog_of_war.set_cell(0, coords);
+	for x in range(current_tile.x -tile_size, current_tile.x + 2 * tile_size, tile_size):
+		for y in range(current_tile.y - tile_size, current_tile.y + 2 * tile_size, tile_size):
+			var coords: Vector2 = Vector2(x,y)
+			game_map.markVisible(coords)
