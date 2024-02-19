@@ -38,14 +38,16 @@ func _physics_process(delta):
 	if !enabled:
 		return
 		
-	
+		
 	if isAtEndOfPath():
+		print('reached')
 		target_reached.emit()
 		return
 	
 	var path = getPathToDestination()
 	
 	if path.size() <= 1:
+		print('no hope')
 		target_unreachable.emit()
 		return
 	

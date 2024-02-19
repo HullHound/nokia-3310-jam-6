@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cb0mhr55ehsbc"]
+[gd_scene load_steps=25 format=3 uid="uid://cb0mhr55ehsbc"]
 
 [ext_resource type="Script" path="res://data/scenes/imp.gd" id="1_b2iwc"]
 [ext_resource type="Material" uid="uid://caabkyh33pd4j" path="res://data/shader/NokiaMaterial.tres" id="2_3bvpw"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://data/heartBeast/FiniteStateMachine/finite_state_machine.gd" id="7_8s12j"]
 [ext_resource type="Script" path="res://data/scenes/SearchForMineTarget.gd" id="8_34mra"]
 [ext_resource type="Script" path="res://data/scenes/MoveToLocation.gd" id="9_w8esl"]
+[ext_resource type="Script" path="res://data/scenes/MoveToLocationState_Adjacent.gd" id="11_heavk"]
 [ext_resource type="Script" path="res://data/scenes/MoveNearby.gd" id="11_ob580"]
 [ext_resource type="Script" path="res://data/scenes/FogOfWarRemover.gd" id="12_pwx5h"]
 [ext_resource type="Script" path="res://data/scenes/SearchForClaimTarget.gd" id="12_tpm0u"]
@@ -161,7 +162,7 @@ script = ExtResource("9_w8esl")
 agent = NodePath("../..")
 
 [node name="MoveToMineTarget" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]
-script = ExtResource("9_w8esl")
+script = ExtResource("11_heavk")
 agent = NodePath("../..")
 
 [node name="MoveNearby" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]

@@ -29,7 +29,7 @@ func pick_claim_target():
 	var target = null
 	for item in potentialTargets:
 		# Check can be reached
-		if game_map.getPath(agent.global_position, item).size() <= 1:
+		if !canReach(item):
 			continue
 			
 		# TODO - Distance Check - prioritise closer? / Closer to Dungeon Heart?
@@ -41,5 +41,15 @@ func pick_claim_target():
 		target_found.emit(target)
 	elif target == null:
 		no_target_found.emit()
+		
+func canReach(location:Vector2):
+	var neighbours = game_map.getNeighbours(location)
+	
+	for cell in neighbours:
+		var newPath = game_map.getPath(agent.global_position, cell);
+		if newPath.size() > 1:
+			return true
+			
+	return false;
 		
 

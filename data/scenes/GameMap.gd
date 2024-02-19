@@ -86,8 +86,8 @@ func getPath(start: Vector2, destination: Vector2):
 
 	return output
 	
-func getDistance(start: Vector2, destination: Vector2):
-	return getPath(start, destination).size()
+#func getDistance(start: Vector2, destination: Vector2):
+	#return getPath(start, destination).size()
 	
 #func getNextPathPoint(start: Vector2, destination: Vector2):
 	#var path = getPath(start, destination)
