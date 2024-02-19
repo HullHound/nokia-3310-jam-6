@@ -1,7 +1,7 @@
 extends State
 
 @export var team_id: int = 0
-@export var fog_of_war: TileMap
+@export var game_map: GameMap2D
 
 signal target_found(target: DamageTarget2D)
 signal no_target_found
@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 		if convertedItem.team_id == team_id:
 			continue;
 			
-		if fog_of_war.get_cell_source_id(0, fog_of_war.local_to_map(convertedItem.global_position)) != -1:
+		if !game_map.isVisible(convertedItem.global_position):
 			continue;
 		
 		# TODO - Distance Check - prioritise closer?

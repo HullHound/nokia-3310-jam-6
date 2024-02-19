@@ -1,5 +1,7 @@
 extends MoveToLocationState
 
+@export var tile_size = Vector2(8,8)
+
 func _enter_state() -> void:
 	super()
 	set_destination()
@@ -7,8 +9,6 @@ func _enter_state() -> void:
 func set_destination():
 	var goalX = 0
 	var goalY = 0
-	
-	var tile_size = game_map.cell_size
 	
 	while goalX == 0 && goalY == 0:
 		goalX = randi_range(-1, 1) * tile_size.x

@@ -2,8 +2,8 @@ extends Node2D
 
 signal died;
 
-@export var tilemap: TileMap
-@export var fog_of_war: TileMap
+
+@export var game_map: GameMap2D
 @export var team_id: int
 
 @onready var fsm: FiniteStateMachine = $FiniteStateMachine
@@ -16,15 +16,14 @@ signal died;
 @onready var health: Health = $Health
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$NavigationAgent2D.set_navigation_map(tilemap.get_layer_navigation_map(0))
-	
 	$DamageTarget2D.team_id = team_id
 	search_for_target.team_id = team_id
-	$FogOfWarRemover.fog_of_war = fog_of_war
-	search_for_target.fog_of_war = fog_of_war
+	$FogOfWarRemover.game_map = game_map
+	search_for_target.game_map = game_map
+	move_nearby.game_map = game_map
+	move_to_target.game_map = game_map
 	
 	search_for_target.target_found.connect(func(target): attack.set_target(target); move_to_target.target = target; fsm.change_state(move_to_target))
 	search_for_target.no_target_found.connect(fsm.change_state.bind(move_nearby))

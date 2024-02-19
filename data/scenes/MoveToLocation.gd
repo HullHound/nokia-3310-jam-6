@@ -40,14 +40,12 @@ func _physics_process(delta):
 		
 		
 	if isAtEndOfPath():
-		print('reached')
 		target_reached.emit()
 		return
 	
 	var path = getPathToDestination()
 	
 	if path.size() <= 1:
-		print('no hope')
 		target_unreachable.emit()
 		return
 	
@@ -55,14 +53,14 @@ func _physics_process(delta):
 		return
 	
 	time_since_last_movement = 0
-	print(path)
+	
 	agent.global_position = path[1];
 	
 	moved.emit()
 	
 func isAtEndOfPath():
 	var position = agent.global_position
-	return game_map.areLocationsTheSame(position, destination)
+	return game_map.getPath(position, destination).size() == 1
 	
 func getPathToDestination():
 	var position = agent.global_position

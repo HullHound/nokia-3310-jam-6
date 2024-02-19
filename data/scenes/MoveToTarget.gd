@@ -1,4 +1,4 @@
-extends MoveToLocationState
+extends MoveToLocationState_Adjacent
 
 @export var target: Node2D
 

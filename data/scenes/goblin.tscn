@@ -76,7 +76,6 @@ debug_path_custom_color = Color(0.952941, 0.164706, 0.584314, 1)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("2_pw8f0")
 texture = SubResource("AtlasTexture_jmu6x")
-centered = false
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_hmy46")
@@ -102,14 +101,14 @@ script = ExtResource("8_1r0vn")
 
 [node name="MoveToTarget" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]
 script = ExtResource("9_pir2q")
-agent = NodePath("")
+agent = NodePath("../..")
 
 [node name="Attack" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("10_yny8l")
 
 [node name="MoveNearby" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]
 script = ExtResource("12_kxt5x")
-agent = NodePath("")
+agent = NodePath("../..")
 movement_delay = 3.0
 
 [node name="FogOfWarRemover" type="Node2D" parent="."]
@@ -117,3 +116,5 @@ script = ExtResource("10_rhsyp")
 
 [connection signal="died" from="Health" to="." method="die"]
 [connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]
+[connection signal="moved" from="FiniteStateMachine/MoveToTarget" to="FogOfWarRemover" method="remove_fog_of_war"]
+[connection signal="moved" from="FiniteStateMachine/MoveNearby" to="FogOfWarRemover" method="remove_fog_of_war"]

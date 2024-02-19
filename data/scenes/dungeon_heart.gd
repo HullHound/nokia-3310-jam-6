@@ -6,15 +6,13 @@ signal died;
 	set(value):
 		$DamageTarget2D.team_id = value
 
-@export var fog_of_war: TileMap
+@export var fog_of_war: GameMap2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
-	#TODO
-	#if fog_of_war != null:
-		#$FogOfWarRemover.fog_of_war = fog_of_war
-		#$FogOfWarRemover.remove_fog_of_war()
+	if fog_of_war != null:
+		$FogOfWarRemover.game_map = fog_of_war
+		$FogOfWarRemover.remove_fog_of_war()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

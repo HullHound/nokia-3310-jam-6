@@ -89,7 +89,6 @@ vertices = PackedVector2Array(0, 0, 8, 0, 8, 8, 0, 8)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("4_od2jv")
 texture = ExtResource("1_ckgt5")
-centered = false
 
 [node name="DamageTarget2D" type="Area2D" parent="." groups=["DamageTarget"]]
 script = ExtResource("1_a244l")
