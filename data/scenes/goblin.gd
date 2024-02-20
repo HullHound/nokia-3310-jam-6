@@ -29,7 +29,7 @@ func _ready() -> void:
 	search_for_target.no_target_found.connect(fsm.change_state.bind(move_nearby))
 	
 	move_to_target.target_reached.connect(fsm.change_state.bind(attack))	
-	move_to_target.target_unreachable.connect(fsm.change_state.bind(search_for_target))
+	move_to_target.target_unreachable.connect(fsm.change_state.bind(move_nearby))
 	
 	attack.finished.connect(fsm.change_state.bind(search_for_target))
 	

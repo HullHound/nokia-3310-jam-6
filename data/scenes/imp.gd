@@ -36,13 +36,13 @@ func _ready() -> void:
 	search_for_mine_target.no_target_found.connect(fsm.change_state.bind(search_for_claim_target))
 	
 	move_to_mine_target.target_reached.connect(fsm.change_state.bind(mine))
-	move_to_mine_target.target_unreachable.connect(fsm.change_state.bind(search_for_mine_target))
+	move_to_mine_target.target_unreachable.connect(fsm.change_state.bind(move_nearby))
 	
 	search_for_claim_target.target_found.connect(func(target): move_to_claim_target.set_target(target); fsm.change_state(move_to_claim_target))
 	search_for_claim_target.no_target_found.connect(fsm.change_state.bind(move_nearby))
 	
 	move_to_claim_target.target_reached.connect(fsm.change_state.bind(claim))	
-	move_to_claim_target.target_unreachable.connect(fsm.change_state.bind(search_for_mine_target))
+	move_to_claim_target.target_unreachable.connect(fsm.change_state.bind(move_nearby))
 	
 	move_nearby.target_reached.connect(fsm.change_state.bind(search_for_mine_target))
 	move_nearby.target_unreachable.connect(fsm.change_state.bind(search_for_mine_target))
