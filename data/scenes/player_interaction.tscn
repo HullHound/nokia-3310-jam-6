@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cc2doy4jxwid1"]
+[gd_scene load_steps=15 format=3 uid="uid://cc2doy4jxwid1"]
 
 [ext_resource type="Script" path="res://data/scenes/DirectionInputMover2D.gd" id="1_mf5f8"]
 [ext_resource type="Script" path="res://data/scenes/player_interaction.gd" id="1_uck3x"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://data/scenes/MarkMineable.gd" id="6_k1g88"]
 [ext_resource type="Script" path="res://data/scenes/PlaceBuilding.gd" id="7_8vflp"]
 [ext_resource type="Script" path="res://data/scenes/BuildPlaceholder.gd" id="8_0aq1u"]
+[ext_resource type="Script" path="res://data/scenes/BuildBuilding.gd" id="8_m86ub"]
+[ext_resource type="PackedScene" uid="uid://i7u5wjemko5a" path="res://data/scenes/lair.tscn" id="9_egxim"]
 [ext_resource type="Texture2D" uid="uid://x04pg0rmamlm" path="res://data/sprites/buildingPlaceHolder.png" id="9_odyjl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6bbk"]
@@ -58,10 +60,17 @@ script = ExtResource("4_ikv5g")
 script = ExtResource("6_k1g88")
 selection_point = NodePath("../..")
 
-[node name="PlaceBuilding" type="Node" parent="FiniteStateMachine"]
+[node name="PlaceBuilding" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("build_place_holder")]
 script = ExtResource("7_8vflp")
+build_place_holder = NodePath("../../BuildPlaceholder")
+
+[node name="BuildBuilding" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("build_place_holder")]
+script = ExtResource("8_m86ub")
+build_place_holder = NodePath("../../BuildPlaceholder")
+BuildingPreFab = ExtResource("9_egxim")
 
 [node name="BuildPlaceholder" type="Node2D" parent="."]
+visible = false
 script = ExtResource("8_0aq1u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BuildPlaceholder"]

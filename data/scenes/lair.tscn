@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://i7u5wjemko5a"]
+
+[ext_resource type="Texture2D" uid="uid://x04pg0rmamlm" path="res://data/sprites/buildingPlaceHolder.png" id="1_1whwa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hcg5"]
+atlas = ExtResource("1_1whwa")
+region = Rect2(0, 0, 48, 24)
+
+[node name="Lair" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_2hcg5")
+hframes = 2
