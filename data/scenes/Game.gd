@@ -16,3 +16,4 @@ func _on_enemy_dungeon_heart_died() -> void:
 
 func _on_end_screen_restart_requested() -> void:
 	get_tree().reload_current_scene()
+	

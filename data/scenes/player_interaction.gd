@@ -8,6 +8,7 @@ extends Node2D
 @onready var mark_mineable: Node = $FiniteStateMachine/MarkMineable
 @onready var place_building: Node = $FiniteStateMachine/PlaceBuilding
 @onready var build_building: Node = $FiniteStateMachine/BuildBuilding
+@onready var slap: Node = $FiniteStateMachine/Slap
 
 
 @export var game_map: GameMap2D
@@ -21,6 +22,7 @@ func _ready() -> void:
 	
 	wait_for_input.minePressed.connect(fsm.change_state.bind(mark_mineable))	
 	wait_for_input.buildPressed.connect(fsm.change_state.bind(place_building))
+	wait_for_input.slapPressed.connect(fsm.change_state.bind(slap))
 	
 	mark_mineable.finished.connect(fsm.change_state.bind(wait_for_input))
 	
@@ -28,6 +30,7 @@ func _ready() -> void:
 	place_building.canceled.connect(fsm.change_state.bind(wait_for_input))
 	
 	build_building.finished.connect(fsm.change_state.bind(wait_for_input))
+	slap.finished.connect(fsm.change_state.bind(wait_for_input))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
