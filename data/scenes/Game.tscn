@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bcl1afttwhcy1"]
+[gd_scene load_steps=16 format=3 uid="uid://bcl1afttwhcy1"]
 
 [ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_3orjx"]
 [ext_resource type="PackedScene" uid="uid://b7cgghr4mk2pa" path="res://data/scenes/dungeon_heart.tscn" id="3_osh5k"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://data/scenes/Game.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://d2eqau2as3123" path="res://data/scenes/end_screen.tscn" id="4_q48f5"]
 [ext_resource type="PackedScene" uid="uid://b1fvhdp4123lx" path="res://data/scenes/goblin.tscn" id="5_0dhr7"]
+[ext_resource type="PackedScene" uid="uid://cc2doy4jxwid1" path="res://data/scenes/player_interaction.tscn" id="8_7xjle"]
 [ext_resource type="Script" path="res://data/scenes/GameMap.gd" id="8_feotn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_y4xj0"]
@@ -131,13 +132,17 @@ grow_vertical = 2
 
 [node name="GameMap" type="Node" parent="."]
 script = ExtResource("8_feotn")
-region = Rect2i(0, 0, 84, 48)
+region = Rect2i(0, 0, 10, 6)
 cell_size = Vector2(1, 1)
 jumping_enabled = false
 offset = Vector2(0, 0)
 ground_atlas_coords = Vector2i(5, 0)
 claimedPlayer_atlas_coords = Vector2i(2, 0)
 claimedEnemy_atlas_coords = Vector2i(3, 0)
+wall_atlas_coords = Vector2i(1, 0)
+selected_wall_atlas_coords = Vector2i(6, 0)
+gold_wall_atlas_coords = Vector2i(9, 0)
+selected_gold_wall_atlas_coords = Vector2i(13, 0)
 
 [node name="Map" type="TileMap" parent="GameMap"]
 tile_set = SubResource("TileSet_gh2e8")
@@ -184,6 +189,9 @@ theme = ExtResource("2_3orjx")
 
 [node name="EndScreen" parent="UI" instance=ExtResource("4_q48f5")]
 visible = false
+
+[node name="PlayerInteraction" parent="." node_paths=PackedStringArray("game_map") instance=ExtResource("8_7xjle")]
+game_map = NodePath("../GameMap")
 
 [connection signal="died" from="PlayerDungeonHeart" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="died" from="PlayerDungeonHeart2" to="." method="_on_player_dungeon_heart_died"]

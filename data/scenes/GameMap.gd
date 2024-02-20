@@ -10,9 +10,16 @@ class_name GameMap2D
 @export var offset = Vector2(4,-4)
 
 @export var tile_map_layer = 3
+
+@export_group("Atlas Coords")
 @export var ground_atlas_coords: Vector2i
 @export var claimedPlayer_atlas_coords: Vector2i
 @export var claimedEnemy_atlas_coords: Vector2i
+@export var wall_atlas_coords: Vector2i
+@export var selected_wall_atlas_coords: Vector2i
+@export var gold_wall_atlas_coords: Vector2i
+@export var selected_gold_wall_atlas_coords: Vector2i
+
 
 var WalkableCustomParam = "Walkable"
 
@@ -34,7 +41,11 @@ class GameTileData:
 enum TileType {
 	Ground,
 	ClaimedPlayer,
-	ClaimedEnemy
+	ClaimedEnemy,
+	Wall,
+	GoldWall,
+	SelectedWall,
+	SelectedGoldWall
 	}
 
 # Called when the node enters the scene tree for the first time.
@@ -100,7 +111,7 @@ func setSolid(location: Vector2, solid: bool = true):
 	#else:
 		#return null
 
-func getTileData(tile:Vector2):
+func getTileData(tile:Vector2) -> GameTileData:
 	var position = tileMap.local_to_map(tile)
 	var tileData = tileMap.get_cell_tile_data(0, position)
 
@@ -134,6 +145,18 @@ func setTile(tile: Vector2, tileType: TileType):
 		TileType.ClaimedEnemy:
 			tileMap.set_cell(0, location, tile_map_layer, claimedEnemy_atlas_coords)
 			astar_grid.set_point_solid(location, false)
+		TileType.Wall:
+			tileMap.set_cell(0, location, tile_map_layer, wall_atlas_coords)
+			astar_grid.set_point_solid(location, true)
+		TileType.GoldWall:
+			tileMap.set_cell(0, location, tile_map_layer, gold_wall_atlas_coords)
+			astar_grid.set_point_solid(location, true)
+		TileType.SelectedWall:
+			tileMap.set_cell(0, location, tile_map_layer, selected_wall_atlas_coords)
+			astar_grid.set_point_solid(location, true)
+		TileType.SelectedGoldWall:
+			tileMap.set_cell(0, location, tile_map_layer, selected_gold_wall_atlas_coords)
+			astar_grid.set_point_solid(location, true)
 		_:
 			pass	
 	

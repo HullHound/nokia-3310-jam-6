@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc2doy4jxwid1"]
+
+[ext_resource type="Script" path="res://data/scenes/DirectionInputMover2D.gd" id="1_mf5f8"]
+[ext_resource type="Script" path="res://data/scenes/player_interaction.gd" id="1_uck3x"]
+[ext_resource type="Texture2D" uid="uid://b6j6yf41bxvc2" path="res://data/sprites/cursor.png" id="2_rksp3"]
+[ext_resource type="Script" path="res://data/heartBeast/FiniteStateMachine/finite_state_machine.gd" id="3_daoh3"]
+[ext_resource type="Script" path="res://data/scenes/WaitForInput.gd" id="4_ikv5g"]
+[ext_resource type="Script" path="res://data/scenes/MarkMineable.gd" id="6_k1g88"]
+
+[node name="PlayerInteraction" type="Node2D"]
+position = Vector2(44, 28)
+script = ExtResource("1_uck3x")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="DirectionInputMover2D" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("1_mf5f8")
+target = NodePath("..")
+bounds = Rect2(0, 0, 80, 48)
+movement_amount = 8
+
+[node name="Cursor" type="Sprite2D" parent="."]
+texture = ExtResource("2_rksp3")
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("3_daoh3")
+state = NodePath("WaitForInput")
+
+[node name="WaitForInput" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("4_ikv5g")
+
+[node name="MarkMineable" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("selection_point")]
+script = ExtResource("6_k1g88")
+selection_point = NodePath("../..")
