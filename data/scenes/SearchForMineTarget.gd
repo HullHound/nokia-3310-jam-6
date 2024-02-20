@@ -24,7 +24,8 @@ func _physics_process(delta: float) -> void:
 	pick_claim_target()
 	
 func pick_claim_target():
-	var potentialTargets: PackedVector2Array = game_map.getTilesWithProperty(search_property)
+	var potentialTargets: Array[Vector2] = game_map.getTilesWithProperty(search_property)
+	potentialTargets.shuffle()
 	
 	var target = null
 	for item in potentialTargets:

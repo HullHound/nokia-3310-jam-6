@@ -37,6 +37,8 @@ class GameTileData:
 	var couldBeClaimed_Enemy: bool
 	var claimedPlayer: bool
 	var claimedEnemy: bool
+	var canBeBuiltOn_Player:bool
+	var canBeBuiltOn_Enemy: bool
 
 enum TileType {
 	Ground,
@@ -127,6 +129,8 @@ func getTileData(tile:Vector2) -> GameTileData:
 	gameData.couldBeClaimed_Enemy = tileData.get_custom_data("couldBeClaimed_Enemy")
 	gameData.claimedPlayer = tileData.get_custom_data("claimedPlayer")	
 	gameData.claimedEnemy = tileData.get_custom_data("claimedEnemy")
+	gameData.canBeBuiltOn_Player = tileData.get_custom_data("canBeBuiltOn_Player")
+	gameData.canBeBuiltOn_Enemy = tileData.get_custom_data("canBeBuiltOn_Enemy")
 	
 	return gameData
 	
@@ -162,7 +166,7 @@ func setTile(tile: Vector2, tileType: TileType):
 	
 
 func getTilesWithProperty(property: String):
-	var output: PackedVector2Array = PackedVector2Array([])
+	var output: Array[Vector2] = []
 	
 	for tile in tileMap.get_used_cells(0):		
 		var tileData = tileMap.get_cell_tile_data(0, tile)
@@ -181,6 +185,16 @@ func _convertToOutputCoords(coords: Array[Vector2i]):
 	
 func getNeighbours(tile: Vector2):
 	return _convertToOutputCoords(tileMap.get_surrounding_cells(tileMap.local_to_map(tile)))
+	
+func getAllSurroundingTiles(tile: Vector2):
+	var center = tileMap.local_to_map(tile)
+	var output: Array[Vector2i]= []
+	
+	for x in range(center.x -1, center.x + 2, 1):
+		for y in range(center.y - 1, center.y + 2, 1):
+			output.append(Vector2i(x,y))
+	
+	return _convertToOutputCoords(output)
 
 func isVisible(tile:Vector2):
 	return fog_of_war.get_cell_source_id(0, fog_of_war.local_to_map(tile)) == -1

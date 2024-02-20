@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bcl1afttwhcy1"]
+[gd_scene load_steps=17 format=3 uid="uid://bcl1afttwhcy1"]
 
 [ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_3orjx"]
 [ext_resource type="PackedScene" uid="uid://b7cgghr4mk2pa" path="res://data/scenes/dungeon_heart.tscn" id="3_osh5k"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://data/scenes/Game.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://d2eqau2as3123" path="res://data/scenes/end_screen.tscn" id="4_q48f5"]
 [ext_resource type="PackedScene" uid="uid://b1fvhdp4123lx" path="res://data/scenes/goblin.tscn" id="5_0dhr7"]
+[ext_resource type="PackedScene" uid="uid://cb0mhr55ehsbc" path="res://data/scenes/imp.tscn" id="6_q88ia"]
 [ext_resource type="PackedScene" uid="uid://cc2doy4jxwid1" path="res://data/scenes/player_interaction.tscn" id="8_7xjle"]
 [ext_resource type="Script" path="res://data/scenes/GameMap.gd" id="8_feotn"]
 
@@ -41,11 +42,13 @@ texture_region_size = Vector2i(8, 8)
 2:0/0/custom_data_0 = true
 2:0/0/custom_data_4 = true
 2:0/0/custom_data_6 = true
+2:0/0/custom_data_8 = true
 3:0/0 = 0
 3:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_qljpe")
 3:0/0/custom_data_0 = true
 3:0/0/custom_data_3 = true
 3:0/0/custom_data_7 = true
+3:0/0/custom_data_9 = true
 4:0/0 = 0
 5:0/0 = 0
 5:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ai5v7")
@@ -95,6 +98,10 @@ custom_data_layer_6/name = "claimedPlayer"
 custom_data_layer_6/type = 1
 custom_data_layer_7/name = "claimedEnemy"
 custom_data_layer_7/type = 1
+custom_data_layer_8/name = "canBeBuiltOn_Player"
+custom_data_layer_8/type = 1
+custom_data_layer_9/name = "canBeBuiltOn_Enemy"
+custom_data_layer_9/type = 1
 sources/3 = SubResource("TileSetAtlasSource_d4fnn")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y4820"]
@@ -147,7 +154,7 @@ selected_gold_wall_atlas_coords = Vector2i(13, 0)
 [node name="Map" type="TileMap" parent="GameMap"]
 tile_set = SubResource("TileSet_gh2e8")
 format = 2
-layer_0/tile_data = PackedInt32Array(131076, 65539, 0, 131077, 327683, 0, 0, 327683, 0, 65536, 327683, 0, 131072, 65539, 0, 196608, 327683, 0, 262144, 131075, 0, 327680, 327683, 0, 1, 327683, 0, 65537, 327683, 0, 196609, 131075, 0, 262145, 327683, 0, 327681, 131075, 0, 2, 393219, 0, 65538, 851971, 0, 196610, 327683, 0, 262146, 131075, 0, 327682, 65539, 0, 3, 327683, 0, 65539, 327683, 0, 131075, 327683, 0, 196611, 327683, 0, 262147, 327683, 0, 327683, 65539, 0, 4, 65539, 0, 65540, 65539, 0, 196612, 327683, 0, 262148, 327683, 0, 327684, 327683, 0, 5, 65539, 0, 65541, 65539, 0, 196613, 327683, 0, 262149, 65539, 0, 327685, 65539, 0, 6, 589827, 0, 65542, 65539, 0, 131078, 327683, 0, 196614, 65539, 0, 262150, 65539, 0, 327686, 65539, 0, 7, 65539, 0, 65543, 65539, 0, 131079, 327683, 0, 196615, 65539, 0, 262151, 327683, 0, 327687, 327683, 0, 8, 589827, 0, 65544, 65539, 0, 131080, 327683, 0, 196616, 327683, 0, 262152, 196611, 0, 327688, 327683, 0, 9, 65539, 0, 65545, 65539, 0, 131081, 327683, 0, 196617, 196611, 0, 262153, 327683, 0, 327689, 196611, 0, 10, 327683, 0, 65546, 327683, 0, 131082, 327683, 0, 196618, 327683, 0, 262154, 196611, 0, 327690, 327683, 0, 393216, 65539, 0, 393217, 65539, 0, 458754, 327683, 0, 458755, 327683, 0, 458756, 327683, 0, 458757, 65539, 0, 458758, 65539, 0, 458759, 327683, 0, 524295, 327683, 0, 524296, 327683, 0, 458760, 327683, 0, 458761, 327683, 0, 393225, 327683, 0, 458752, 327683, 0, 524288, 327683, 0, 458753, 327683, 0, 524289, 327683, 0, 393218, 65539, 0, 524290, 327683, 0, 393219, 65539, 0, 524291, 327683, 0, 393220, 327683, 0, 524292, 327683, 0, 393221, 65539, 0, 524293, 65539, 0, 393222, 65539, 0, 524294, 65539, 0, 393223, 327683, 0, 393224, 327683, 0, 524297, 327683, 0, 393226, 327683, 0, 458762, 327683, 0, 524298, 327683, 0, 131073, 327683, 0, 131074, 327683, 0)
+layer_0/tile_data = PackedInt32Array(131076, 65539, 0, 131077, 327683, 0, 0, 327683, 0, 65536, 327683, 0, 131072, 65539, 0, 196608, 327683, 0, 262144, 131075, 0, 327680, 327683, 0, 1, 327683, 0, 65537, 327683, 0, 196609, 131075, 0, 262145, 327683, 0, 327681, 131075, 0, 2, 393219, 0, 65538, 851971, 0, 196610, 327683, 0, 262146, 131075, 0, 327682, 65539, 0, 3, 327683, 0, 65539, 327683, 0, 131075, 327683, 0, 196611, 327683, 0, 262147, 327683, 0, 327683, 327683, 0, 4, 65539, 0, 65540, 65539, 0, 196612, 327683, 0, 262148, 327683, 0, 327684, 327683, 0, 5, 65539, 0, 65541, 65539, 0, 196613, 327683, 0, 262149, 327683, 0, 327685, 327683, 0, 6, 589827, 0, 65542, 65539, 0, 131078, 327683, 0, 196614, 65539, 0, 262150, 65539, 0, 327686, 65539, 0, 7, 65539, 0, 65543, 65539, 0, 131079, 327683, 0, 196615, 65539, 0, 262151, 327683, 0, 327687, 327683, 0, 8, 327683, 0, 65544, 327683, 0, 131080, 327683, 0, 196616, 327683, 0, 262152, 196611, 0, 327688, 327683, 0, 9, 327683, 0, 65545, 327683, 0, 131081, 327683, 0, 196617, 196611, 0, 262153, 327683, 0, 327689, 196611, 0, 10, 327683, 0, 65546, 327683, 0, 131082, 327683, 0, 196618, 327683, 0, 262154, 196611, 0, 327690, 327683, 0, 393216, 65539, 0, 393217, 65539, 0, 458754, 327683, 0, 458755, 327683, 0, 458756, 327683, 0, 458757, 327683, 0, 458758, 65539, 0, 458759, 327683, 0, 524295, 327683, 0, 524296, 327683, 0, 458760, 327683, 0, 458761, 327683, 0, 393225, 327683, 0, 458752, 327683, 0, 524288, 327683, 0, 458753, 327683, 0, 524289, 327683, 0, 393218, 65539, 0, 524290, 327683, 0, 524291, 327683, 0, 524292, 327683, 0, 393221, 327683, 0, 524293, 327683, 0, 393222, 65539, 0, 524294, 65539, 0, 393223, 327683, 0, 393224, 327683, 0, 524297, 327683, 0, 393226, 327683, 0, 458762, 327683, 0, 524298, 327683, 0, 131073, 327683, 0, 131074, 327683, 0, 393219, 327683, 0, 393220, 327683, 0)
 
 [node name="FogOfWar" type="TileMap" parent="GameMap"]
 visible = false
@@ -161,6 +168,10 @@ game_map = NodePath("../GameMap")
 
 [node name="Goblin2" parent="." node_paths=PackedStringArray("game_map") instance=ExtResource("5_0dhr7")]
 position = Vector2(12, 4)
+game_map = NodePath("../GameMap")
+
+[node name="Imp" parent="." node_paths=PackedStringArray("game_map") instance=ExtResource("6_q88ia")]
+position = Vector2(12, 12)
 game_map = NodePath("../GameMap")
 
 [node name="PlayerDungeonHeart" parent="." node_paths=PackedStringArray("game_map") instance=ExtResource("3_osh5k")]

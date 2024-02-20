@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cc2doy4jxwid1"]
+[gd_scene load_steps=13 format=3 uid="uid://cc2doy4jxwid1"]
 
 [ext_resource type="Script" path="res://data/scenes/DirectionInputMover2D.gd" id="1_mf5f8"]
 [ext_resource type="Script" path="res://data/scenes/player_interaction.gd" id="1_uck3x"]
@@ -6,6 +6,31 @@
 [ext_resource type="Script" path="res://data/heartBeast/FiniteStateMachine/finite_state_machine.gd" id="3_daoh3"]
 [ext_resource type="Script" path="res://data/scenes/WaitForInput.gd" id="4_ikv5g"]
 [ext_resource type="Script" path="res://data/scenes/MarkMineable.gd" id="6_k1g88"]
+[ext_resource type="Script" path="res://data/scenes/PlaceBuilding.gd" id="7_8vflp"]
+[ext_resource type="Script" path="res://data/scenes/BuildPlaceholder.gd" id="8_0aq1u"]
+[ext_resource type="Texture2D" uid="uid://x04pg0rmamlm" path="res://data/sprites/buildingPlaceHolder.png" id="9_odyjl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6bbk"]
+atlas = ExtResource("9_odyjl")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm641"]
+atlas = ExtResource("9_odyjl")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ydqql"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6bbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lm641")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="PlayerInteraction" type="Node2D"]
 position = Vector2(44, 28)
@@ -32,3 +57,12 @@ script = ExtResource("4_ikv5g")
 [node name="MarkMineable" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("selection_point")]
 script = ExtResource("6_k1g88")
 selection_point = NodePath("../..")
+
+[node name="PlaceBuilding" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("7_8vflp")
+
+[node name="BuildPlaceholder" type="Node2D" parent="."]
+script = ExtResource("8_0aq1u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BuildPlaceholder"]
+sprite_frames = SubResource("SpriteFrames_ydqql")
