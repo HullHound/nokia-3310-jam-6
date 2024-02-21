@@ -9,6 +9,7 @@ class_name GameMap2D
 @export var heuristic = AStarGrid2D.HEURISTIC_MANHATTAN 
 @export var offset = Vector2(4,-4)
 
+var tile_map_wall_layer = 1
 @export var tile_map_layer = 3
 
 @export_group("Atlas Coords")
@@ -19,6 +20,8 @@ class_name GameMap2D
 @export var selected_wall_atlas_coords: Vector2i
 @export var gold_wall_atlas_coords: Vector2i
 @export var selected_gold_wall_atlas_coords: Vector2i
+
+@export var replace_walls_workaround: Array[Vector2i]
 
 
 var WalkableCustomParam = "Walkable"
@@ -76,10 +79,10 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return PackedStringArray([])
 	
 func _populateTileObstacles():
-	var filledCells = tileMap.get_used_cells(0)
+	var filledCells = tileMap.get_used_cells(tile_map_wall_layer)
 	
 	for cell in filledCells:
-		var tileData = tileMap.get_cell_tile_data(0, cell)
+		var tileData = tileMap.get_cell_tile_data(tile_map_wall_layer, cell)
 		astar_grid.set_point_solid(cell, !tileData.get_custom_data("Walkable"))
 
 func getPath(start: Vector2, destination: Vector2):
@@ -115,7 +118,7 @@ func setSolid(location: Vector2, solid: bool = true):
 
 func getTileData(tile:Vector2) -> GameTileData:
 	var position = tileMap.local_to_map(tile)
-	var tileData = tileMap.get_cell_tile_data(0, position)
+	var tileData = tileMap.get_cell_tile_data(tile_map_wall_layer, position)
 
 	if tileData == null:
 		return GameTileData.new() # or null?
@@ -136,10 +139,12 @@ func getTileData(tile:Vector2) -> GameTileData:
 	
 func clearTile(tile: Vector2):
 	var location = tileMap.local_to_map(tile)
-	tileMap.set_cell(0, location, tile_map_layer, ground_atlas_coords)
+	tileMap.erase_cell(tile_map_wall_layer, location)
 	astar_grid.set_point_solid(location, false)
-		
-func setTile(tile: Vector2, tileType: TileType):
+	tileMap.set_cells_terrain_connect(tile_map_wall_layer, [location], 0, -1)
+	
+
+func setTile(tile: Vector2, tileType: TileType):	
 	var location = tileMap.local_to_map(tile)
 	
 	match tileType:
@@ -150,16 +155,16 @@ func setTile(tile: Vector2, tileType: TileType):
 			tileMap.set_cell(0, location, tile_map_layer, claimedEnemy_atlas_coords)
 			astar_grid.set_point_solid(location, false)
 		TileType.Wall:
-			tileMap.set_cell(0, location, tile_map_layer, wall_atlas_coords)
+			tileMap.set_cell(tile_map_wall_layer, location, tile_map_layer, wall_atlas_coords)
 			astar_grid.set_point_solid(location, true)
 		TileType.GoldWall:
-			tileMap.set_cell(0, location, tile_map_layer, gold_wall_atlas_coords)
+			tileMap.set_cell(tile_map_wall_layer, location, tile_map_layer, gold_wall_atlas_coords)
 			astar_grid.set_point_solid(location, true)
 		TileType.SelectedWall:
-			tileMap.set_cell(0, location, tile_map_layer, selected_wall_atlas_coords)
+			tileMap.set_cell(tile_map_wall_layer, location, tile_map_layer, selected_wall_atlas_coords)
 			astar_grid.set_point_solid(location, true)
 		TileType.SelectedGoldWall:
-			tileMap.set_cell(0, location, tile_map_layer, selected_gold_wall_atlas_coords)
+			tileMap.set_cell(tile_map_wall_layer, location, tile_map_layer, selected_gold_wall_atlas_coords)
 			astar_grid.set_point_solid(location, true)
 		_:
 			pass	
@@ -170,6 +175,11 @@ func getTilesWithProperty(property: String):
 	
 	for tile in tileMap.get_used_cells(0):		
 		var tileData = tileMap.get_cell_tile_data(0, tile)
+		if tileData.get_custom_data(property):
+			output.append(tileMap.map_to_local(tile))
+	
+	for tile in tileMap.get_used_cells(tile_map_wall_layer):		
+		var tileData = tileMap.get_cell_tile_data(tile_map_wall_layer, tile)
 		if tileData.get_custom_data(property):
 			output.append(tileMap.map_to_local(tile))
 
