@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://data/scenes/imp.gd" id="1_b2iwc"]
 [ext_resource type="Material" uid="uid://caabkyh33pd4j" path="res://data/shader/NokiaMaterial.tres" id="2_3bvpw"]
-[ext_resource type="Texture2D" uid="uid://bxneset5fpjyn" path="res://data/sprites/1 Bit Adventure Pack.png" id="3_rr2pn"]
+[ext_resource type="Texture2D" uid="uid://b4ye4pxy0vayx" path="res://data/sprites/SpriteSheet.png" id="3_c7c64"]
 [ext_resource type="Script" path="res://data/nodes/health.gd" id="4_jt7pj"]
 [ext_resource type="Script" path="res://data/nodes/damage_target.gd" id="5_xqqjs"]
 [ext_resource type="Material" uid="uid://yudv6e212hb6" path="res://data/shader/NokiaMaterial_Inverted.tres" id="6_ot5jj"]
@@ -17,9 +17,9 @@
 [ext_resource type="Script" path="res://data/scenes/Mine.gd" id="13_rcxdl"]
 [ext_resource type="Script" path="res://data/scenes/Claim.gd" id="13_ykhsw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jmu6x"]
-atlas = ExtResource("3_rr2pn")
-region = Rect2(0, 40, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_5edl3"]
+atlas = ExtResource("3_c7c64")
+region = Rect2(48, 64, 8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1e5q4"]
 size = Vector2(8, 8)
@@ -127,7 +127,7 @@ script = ExtResource("1_b2iwc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("2_3bvpw")
-texture = SubResource("AtlasTexture_jmu6x")
+texture = SubResource("AtlasTexture_5edl3")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_jt7pj")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://b1fvhdp4123lx"]
 
 [ext_resource type="Script" path="res://data/scenes/goblin.gd" id="1_ds06r"]
-[ext_resource type="Texture2D" uid="uid://bxneset5fpjyn" path="res://data/sprites/1 Bit Adventure Pack.png" id="1_s55wf"]
 [ext_resource type="Script" path="res://data/nodes/health.gd" id="2_hmy46"]
 [ext_resource type="Material" uid="uid://caabkyh33pd4j" path="res://data/shader/NokiaMaterial.tres" id="2_pw8f0"]
+[ext_resource type="Texture2D" uid="uid://b4ye4pxy0vayx" path="res://data/sprites/SpriteSheet.png" id="3_dq15a"]
 [ext_resource type="Script" path="res://data/nodes/damage_target.gd" id="4_hlm0u"]
 [ext_resource type="Material" uid="uid://yudv6e212hb6" path="res://data/shader/NokiaMaterial_Inverted.tres" id="6_lfl15"]
 [ext_resource type="Script" path="res://data/heartBeast/FiniteStateMachine/finite_state_machine.gd" id="7_7lavw"]
@@ -13,9 +13,9 @@
 [ext_resource type="Script" path="res://data/scenes/Attack.gd" id="10_yny8l"]
 [ext_resource type="Script" path="res://data/scenes/MoveNearby.gd" id="12_kxt5x"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jmu6x"]
-atlas = ExtResource("1_s55wf")
-region = Rect2(8, 40, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8g8rh"]
+atlas = ExtResource("3_dq15a")
+region = Rect2(32, 64, 8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1e5q4"]
 size = Vector2(8, 8)
@@ -75,7 +75,7 @@ debug_path_custom_color = Color(0.952941, 0.164706, 0.584314, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("2_pw8f0")
-texture = SubResource("AtlasTexture_jmu6x")
+texture = SubResource("AtlasTexture_8g8rh")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_hmy46")
