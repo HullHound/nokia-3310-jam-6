@@ -149,10 +149,10 @@ func setTile(tile: Vector2, tileType: TileType):
 	
 	match tileType:
 		TileType.ClaimedPlayer:
-			tileMap.set_cell(0, location, tile_map_layer, claimedPlayer_atlas_coords)
+			tileMap.set_cell(0, location, tile_map_wall_layer, claimedPlayer_atlas_coords)
 			astar_grid.set_point_solid(location, false)
 		TileType.ClaimedEnemy:
-			tileMap.set_cell(0, location, tile_map_layer, claimedEnemy_atlas_coords)
+			tileMap.set_cell(0, location, tile_map_wall_layer, claimedEnemy_atlas_coords)
 			astar_grid.set_point_solid(location, false)
 		TileType.Wall:
 			tileMap.set_cell(tile_map_wall_layer, location, tile_map_layer, wall_atlas_coords)
@@ -175,11 +175,15 @@ func getTilesWithProperty(property: String):
 	
 	for tile in tileMap.get_used_cells(0):		
 		var tileData = tileMap.get_cell_tile_data(0, tile)
+		if tileData == null:
+			continue
 		if tileData.get_custom_data(property):
 			output.append(tileMap.map_to_local(tile))
 	
 	for tile in tileMap.get_used_cells(tile_map_wall_layer):		
 		var tileData = tileMap.get_cell_tile_data(tile_map_wall_layer, tile)
+		if tileData == null:
+			continue
 		if tileData.get_custom_data(property):
 			output.append(tileMap.map_to_local(tile))
 
