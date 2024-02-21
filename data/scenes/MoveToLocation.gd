@@ -38,7 +38,6 @@ func _physics_process(delta):
 	if !enabled:
 		return
 		
-		
 	if isAtEndOfPath():
 		target_reached.emit()
 		return

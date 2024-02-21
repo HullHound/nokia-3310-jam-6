@@ -1,10 +1,6 @@
 extends State
 
 @export var game_map: GameMap2D
-@export var claimed_source_id: Vector2i
-@export var claimable_source_ids: Array[Vector2i]
-
-@export var claimTile: GameMap2D.TileType
 
 signal target_found(target: Vector2)
 signal no_target_found

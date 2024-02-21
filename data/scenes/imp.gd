@@ -1,9 +1,14 @@
 extends Node2D
+class_name Imp
 
 signal died;
 
 @export var game_map: GameMap2D
 @export var team_id: int
+
+@export var claim_search_property = "couldBeClaimed_Player"
+@export var claim_neighbour_property = "claimedPlayer"
+@export var claim_type: GameMap2D.TileType = GameMap2D.TileType.ClaimedPlayer
 
 @onready var fsm: FiniteStateMachine = $FiniteStateMachine
 
@@ -31,6 +36,10 @@ func _ready() -> void:
 	move_nearby.game_map = game_map
 	move_to_claim_target.game_map = game_map
 	move_to_mine_target.game_map = game_map
+	
+	search_for_claim_target.search_property = claim_search_property	
+	search_for_claim_target.neighbour_property = claim_neighbour_property
+	claim.claim_type = claim_type
 	
 	search_for_mine_target.target_found.connect(func(target): move_to_mine_target.set_target(target); mine.target_tile = target; fsm.change_state(move_to_mine_target))
 	search_for_mine_target.no_target_found.connect(fsm.change_state.bind(search_for_claim_target))

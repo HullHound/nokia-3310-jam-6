@@ -153,8 +153,6 @@ agent = NodePath("../..")
 
 [node name="SearchForClaimTarget" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("12_tpm0u")
-claimed_source_id = Vector2i(2, 0)
-claimable_source_ids = Array[Vector2i]([Vector2i(3, 0), Vector2i(5, 0)])
 
 [node name="MoveToClaimTarget" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]
 script = ExtResource("9_w8esl")
