@@ -22,6 +22,10 @@ func _physics_process(delta: float) -> void:
 	
 func markAsMineable() -> void:	
 	var tile = selection_point.global_position
+	
+	if !game_map.isVisible(tile):
+		return
+	
 	var tileData = game_map.getTileData(tile)
 	
 	if !tileData.couldBeMined && !tileData.toBeMined: 

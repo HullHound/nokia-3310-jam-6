@@ -19,6 +19,7 @@ extends Node2D
 func _ready() -> void:
 	build_placeholder.game_map = game_map
 	mark_mineable.game_map = game_map
+	slap.game_map = game_map
 	build_building.build_container = build_container
 	
 	wait_for_input.minePressed.connect(fsm.change_state.bind(mark_mineable))	

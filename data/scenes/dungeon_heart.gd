@@ -10,7 +10,7 @@ signal died;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if team_id == 0:
+	if $DamageTarget2D.team_id == 0:
 		$FogOfWarRemover.game_map = game_map
 		$FogOfWarRemover.remove_fog_of_war()
 		
