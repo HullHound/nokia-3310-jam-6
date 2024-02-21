@@ -7,6 +7,7 @@ extends State
 var enabled = false
 
 signal finished
+signal build_callback(node: Node2D)
 
 func _enter_state() -> void:
 	enabled = true
@@ -24,5 +25,8 @@ func _input(event: InputEvent) -> void:
 func buildBuilding():
 	var node = BuildingPreFab.instantiate() as Node2D
 	node.global_position = build_place_holder.global_position
+	
+	build_callback.emit(node)
 	build_container.add_child(node)
+
 	#TODO = Particle Effet / Sound / Animation

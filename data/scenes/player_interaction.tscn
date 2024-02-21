@@ -86,3 +86,5 @@ script = ExtResource("8_0aq1u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BuildPlaceholder"]
 sprite_frames = SubResource("SpriteFrames_ydqql")
+
+[connection signal="build_callback" from="FiniteStateMachine/BuildBuilding" to="." method="_on_build_building_build_callback"]

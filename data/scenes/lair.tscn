@@ -1,13 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://i7u5wjemko5a"]
+[gd_scene load_steps=6 format=3 uid="uid://i7u5wjemko5a"]
 
 [ext_resource type="Texture2D" uid="uid://x04pg0rmamlm" path="res://data/sprites/buildingPlaceHolder.png" id="1_1whwa"]
+[ext_resource type="Script" path="res://data/scenes/lair.gd" id="1_eba4m"]
+[ext_resource type="Script" path="res://data/scenes/Spawner.gd" id="2_ccbo1"]
+[ext_resource type="PackedScene" uid="uid://b1fvhdp4123lx" path="res://data/scenes/goblin.tscn" id="3_ey1x8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hcg5"]
 atlas = ExtResource("1_1whwa")
 region = Rect2(0, 0, 48, 24)
 
 [node name="Lair" type="Node2D"]
+script = ExtResource("1_eba4m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_2hcg5")
 hframes = 2
+
+[node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("spawn_location")]
+script = ExtResource("2_ccbo1")
+spawn_location = NodePath("../SpawnLocation")
+spawn_prefab = ExtResource("3_ey1x8")
+
+[node name="SpawnLocation" type="Marker2D" parent="."]
+
+[connection signal="spawn_callback" from="Spawner" to="." method="_on_spawner_spawn_callback"]
