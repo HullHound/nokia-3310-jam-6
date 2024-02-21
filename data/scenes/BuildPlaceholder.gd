@@ -8,6 +8,8 @@ class_name BuildPlaceholder
 @export var ok_frame = 1
 @export var canBeBuiltOnProperty = "canBeBuiltOn_Player"
 
+@onready var ray_casts: Node2D = $RayCasts
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -27,6 +29,10 @@ func canBuild():
 	
 	for tile in tiles:
 		if !game_map.getTileData(tile)[canBeBuiltOnProperty]:
+			canBuild = false
+			
+	for raycast: RayCast2D in ray_casts.get_children():
+		if raycast.is_colliding():
 			canBuild = false
 			
 	return canBuild

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7cgghr4mk2pa"]
+[gd_scene load_steps=16 format=3 uid="uid://b7cgghr4mk2pa"]
 
 [ext_resource type="Script" path="res://data/nodes/damage_target.gd" id="1_a244l"]
 [ext_resource type="Texture2D" uid="uid://7h7ujfkn4cf1" path="res://data/sprites/heart-01.png" id="1_ckgt5"]
@@ -80,6 +80,9 @@ _data = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1j4qc"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gl5cm"]
+size = Vector2(8, 8)
+
 [node name="DungeonHeart" type="Node2D"]
 script = ExtResource("1_odn4d")
 
@@ -106,6 +109,13 @@ autoplay = "heart_beat"
 
 [node name="FogOfWarRemover" type="Node2D" parent="."]
 script = ExtResource("8_82ya3")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_gl5cm")
 
 [connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]
 [connection signal="damaged" from="DamageTarget2D" to="Health" method="decrement_health"]

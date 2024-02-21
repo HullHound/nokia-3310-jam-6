@@ -87,4 +87,77 @@ script = ExtResource("8_0aq1u")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BuildPlaceholder"]
 sprite_frames = SubResource("SpriteFrames_ydqql")
 
+[node name="RayCasts" type="Node2D" parent="BuildPlaceholder"]
+
+[node name="RayCast2D" type="RayCast2D" parent="BuildPlaceholder/RayCasts"]
+position = Vector2(-8, -8)
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D2" type="RayCast2D" parent="BuildPlaceholder/RayCasts"]
+position = Vector2(0, -8)
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D3" type="RayCast2D" parent="BuildPlaceholder/RayCasts"]
+position = Vector2(8, -8)
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D4" type="RayCast2D" parent="BuildPlaceholder/RayCasts"]
+position = Vector2(-8, 0)
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D5" type="RayCast2D" parent="BuildPlaceholder/RayCasts"]
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D6" type="RayCast2D" parent="BuildPlaceholder/RayCasts"]
+position = Vector2(8, 0)
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D7" type="RayCast2D" parent="BuildPlaceholder/RayCasts"]
+position = Vector2(-8, 8)
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D8" type="RayCast2D" parent="BuildPlaceholder/RayCasts"]
+position = Vector2(0, 8)
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D9" type="RayCast2D" parent="BuildPlaceholder/RayCasts"]
+position = Vector2(8, 8)
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
 [connection signal="build_callback" from="FiniteStateMachine/BuildBuilding" to="." method="_on_build_building_build_callback"]

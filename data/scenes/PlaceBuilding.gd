@@ -20,4 +20,5 @@ func _input(event: InputEvent) -> void:
 		canceled.emit()
 	
 	if event.is_action_released("Confirm"):
-		build.emit()
+		if build_place_holder.canBuild():
+			build.emit()
