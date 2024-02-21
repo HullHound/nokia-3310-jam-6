@@ -193,22 +193,30 @@ position = Vector2(76, 36)
 team_id = 1
 game_map = NodePath("../GameMap")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 84.0
-offset_bottom = 48.0
-theme = ExtResource("2_3orjx")
-
-[node name="EndScreen" parent="UI" instance=ExtResource("4_q48f5")]
-visible = false
-
 [node name="PlayerInteraction" parent="." node_paths=PackedStringArray("game_map", "build_container") instance=ExtResource("8_7xjle")]
 game_map = NodePath("../GameMap")
 build_container = NodePath("../GameMap/BuildContainer")
+
+[node name="UI" type="Control" parent="PlayerInteraction"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -24.0
+offset_right = -42.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_3orjx")
+
+[node name="EndScreen" parent="PlayerInteraction/UI" instance=ExtResource("4_q48f5")]
+visible = false
 
 [connection signal="died" from="PlayerDungeonHeart" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="died" from="PlayerDungeonHeart2" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="died" from="PlayerDungeonHeart3" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="died" from="EnemyDungeonHeart" to="." method="_on_enemy_dungeon_heart_died"]
-[connection signal="restart_requested" from="UI/EndScreen" to="." method="_on_end_screen_restart_requested"]
+[connection signal="restart_requested" from="PlayerInteraction/UI/EndScreen" to="." method="_on_end_screen_restart_requested"]
