@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	pick_claim_target()
 	
 func pick_claim_target():
-	var potentialTargets: Array[Vector2] = game_map.getTilesWithProperty(search_property)
+	var potentialTargets: Array[Vector2] = game_map.getMineTargets()
 	potentialTargets.shuffle()
 	
 	var target = null
@@ -48,6 +48,7 @@ func canReach(location:Vector2):
 	
 	for cell in neighbours:
 		var newPath = game_map.getPath(agent.global_position, cell);
+		
 		if newPath.size() > 1:
 			return true
 			

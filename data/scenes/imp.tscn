@@ -172,10 +172,11 @@ script = ExtResource("13_ykhsw")
 agent = NodePath("../..")
 overlay_player = NodePath("../../OverlayPlayer")
 
-[node name="Mine" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("overlay_player")]
+[node name="Mine" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("overlay_player", "mine_marker_ray_cast")]
 script = ExtResource("13_rcxdl")
 ground_source_id = Vector2i(5, 0)
 overlay_player = NodePath("../../OverlayPlayer")
+mine_marker_ray_cast = NodePath("../../MineMarkerRayCast2D")
 
 [node name="FogOfWarRemover" type="Node2D" parent="."]
 script = ExtResource("12_pwx5h")
@@ -188,8 +189,16 @@ libraries = {
 "": SubResource("AnimationLibrary_2pbj4")
 }
 
+[node name="MineMarkerRayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
 [connection signal="died" from="Health" to="." method="die"]
 [connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]
 [connection signal="moved" from="FiniteStateMachine/MoveToClaimTarget" to="FogOfWarRemover" method="remove_fog_of_war"]
 [connection signal="moved" from="FiniteStateMachine/MoveToMineTarget" to="FogOfWarRemover" method="remove_fog_of_war"]
+[connection signal="moved" from="FiniteStateMachine/MoveNearby" to="FogOfWarRemover" method="remove_fog_of_war"]
 [connection signal="gold_mined" from="FiniteStateMachine/Mine" to="." method="_on_mine_gold_mined"]

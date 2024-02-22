@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cc2doy4jxwid1"]
+[gd_scene load_steps=18 format=3 uid="uid://cc2doy4jxwid1"]
 
 [ext_resource type="Script" path="res://data/scenes/DirectionInputMover2D.gd" id="1_mf5f8"]
 [ext_resource type="Script" path="res://data/scenes/player_interaction.gd" id="1_uck3x"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://data/scenes/WaitForInput.gd" id="4_ikv5g"]
 [ext_resource type="Script" path="res://data/scenes/MarkMineable.gd" id="6_k1g88"]
 [ext_resource type="Script" path="res://data/scenes/PlaceBuilding.gd" id="7_8vflp"]
+[ext_resource type="PackedScene" uid="uid://c3ff8pfx0k1o7" path="res://data/scenes/mine_marker.tscn" id="7_b37v7"]
 [ext_resource type="Script" path="res://data/scenes/BuildPlaceholder.gd" id="8_0aq1u"]
 [ext_resource type="Script" path="res://data/scenes/BuildBuilding.gd" id="8_m86ub"]
 [ext_resource type="PackedScene" uid="uid://i7u5wjemko5a" path="res://data/scenes/lair.tscn" id="9_egxim"]
@@ -43,7 +44,7 @@ animations = [{
 position = Vector2(44, 28)
 script = ExtResource("1_uck3x")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="SlapRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
 hit_from_inside = true
 collide_with_areas = true
@@ -67,9 +68,12 @@ state = NodePath("WaitForInput")
 [node name="WaitForInput" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("4_ikv5g")
 
-[node name="MarkMineable" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("selection_point")]
+[node name="MarkMineable" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("selection_point", "MineRayCast", "mark_container")]
 script = ExtResource("6_k1g88")
 selection_point = NodePath("../..")
+MineRayCast = NodePath("../../MineRayCast")
+MineableMark = ExtResource("7_b37v7")
+mark_container = NodePath("../../MarkContainer")
 
 [node name="PlaceBuilding" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("build_place_holder")]
 script = ExtResource("7_8vflp")
@@ -82,7 +86,7 @@ BuildingPreFab = ExtResource("9_egxim")
 
 [node name="Slap" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("ray_cast_2d")]
 script = ExtResource("10_qjdb3")
-ray_cast_2d = NodePath("../../RayCast2D")
+ray_cast_2d = NodePath("../../SlapRayCast")
 
 [node name="BuildPlaceholder" type="Node2D" parent="."]
 visible = false
@@ -163,5 +167,14 @@ collision_mask = 2
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="MineRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="MarkContainer" type="Node2D" parent="."]
 
 [connection signal="build_callback" from="FiniteStateMachine/BuildBuilding" to="." method="_on_build_building_build_callback"]

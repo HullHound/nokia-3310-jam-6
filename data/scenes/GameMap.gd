@@ -31,6 +31,8 @@ var astar_grid: AStarGrid2D = AStarGrid2D.new()
 var tileMap: TileMap
 var fog_of_war: TileMap
 
+var mineableMarks: Array[Area2D] = []
+
 class GameTileData:
 	var containsGold: bool
 	var isWalkable: bool
@@ -188,6 +190,20 @@ func getTilesWithProperty(property: String):
 			output.append(tileMap.map_to_local(tile))
 
 	return output
+	
+func registerMineTarget(mark: Area2D):
+	mineableMarks.append(mark)
+	
+func getMineTargets() -> Array[Vector2]:
+	var outputs: Array[Vector2] = []
+	
+	for mark in mineableMarks:
+		outputs.append(tileMap.map_to_local(tileMap.local_to_map(mark.global_position)))
+		
+	return outputs
+
+func clearMineTarget(mark: Area2D):
+	mineableMarks.erase(mark)
 
 func _convertToOutputCoords(coords: Array[Vector2i]):
 	var output: Array[Vector2] = []

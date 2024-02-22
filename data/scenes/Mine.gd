@@ -5,6 +5,7 @@ extends State
 @export var tilemap_source_id = 3
 @export var ground_source_id: Vector2i
 @export var overlay_player: AnimationPlayer
+@export var mine_marker_ray_cast: RayCast2D
 
 @export var time_to_mine: float = 3.0
 
@@ -39,6 +40,15 @@ func _physics_process(delta: float) -> void:
 	
 	if current_mine_time >= time_to_mine:
 		var tileData = game_map.getTileData(target_tile)
+		
+		mine_marker_ray_cast.global_position = target_tile
+		mine_marker_ray_cast.force_raycast_update()
+		if mine_marker_ray_cast.is_colliding():
+			var marker = mine_marker_ray_cast.get_collider() as Area2D
+			game_map.clearMineTarget(marker)
+			marker.visible = false
+			marker.queue_free()
+		
 		game_map.clearTile(target_tile)
 		
 		if tileData.containsGold:

@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3ff8pfx0k1o7"]
+
+[ext_resource type="Texture2D" uid="uid://b4ye4pxy0vayx" path="res://data/sprites/SpriteSheet.png" id="1_uouk5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huygk"]
+atlas = ExtResource("1_uouk5")
+region = Rect2(96, 24, 8, 8)
+
+[sub_resource type="Animation" id="Animation_3ow3d"]
+resource_name = "MineMarker"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(0, 0, 0, 0, 0, 0),
+"update": 0,
+"values": [Rect2(96, 24, 8, 8), Rect2(112, 24, 8, 8), Rect2(96, 24, 8, 8), Rect2(112, 24, 8, 8), Rect2(96, 24, 8, 8), Rect2(112, 24, 8, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_j7obo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(96, 24, 8, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kq51j"]
+_data = {
+"MineMarker": SubResource("Animation_3ow3d"),
+"RESET": SubResource("Animation_j7obo")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64pn5"]
+size = Vector2(8, 8)
+
+[node name="MineMarker" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_huygk")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kq51j")
+}
+autoplay = "MineMarker"
+speed_scale = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_64pn5")

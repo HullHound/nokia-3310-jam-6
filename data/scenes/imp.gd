@@ -25,7 +25,7 @@ signal died;
 
 @onready var health: Health = $Health
 
-# Called when the node enters the scene tree for the first time.
+# Called when the node enters the scene tree for the first time.	
 func _ready() -> void:
 	$DamageTarget2D.team_id = team_id
 	$FogOfWarRemover.game_map = game_map

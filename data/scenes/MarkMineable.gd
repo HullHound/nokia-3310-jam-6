@@ -3,6 +3,10 @@ extends State
 @export var selection_point: Node2D
 @export var game_map: GameMap2D
 
+@export var MineRayCast: RayCast2D
+@export var MineableMark: PackedScene
+@export var mark_container: Node2D
+
 var enabled = false
 
 signal finished
@@ -25,21 +29,20 @@ func markAsMineable() -> void:
 	
 	if !game_map.isVisible(tile):
 		return
+		
+	if MineRayCast.is_colliding():
+		# Remove Mark
+		var mark = MineRayCast.get_collider() as Area2D
+		game_map.clearMineTarget(mark)
+		mark.queue_free()
+		return
 	
 	var tileData = game_map.getTileData(tile)
 	
-	if !tileData.couldBeMined && !tileData.toBeMined: 
-		return;
-
-	if tileData.couldBeMined:
-		if tileData.containsGold:
-			game_map.setTile(tile, GameMap2D.TileType.SelectedGoldWall)
-		else:
-			game_map.setTile(tile, GameMap2D.TileType.SelectedWall)
-	elif tileData.toBeMined:
-		if tileData.containsGold:			
-			game_map.setTile(tile, GameMap2D.TileType.GoldWall)
-		else:
-			game_map.setTile(tile, GameMap2D.TileType.Wall)
-
-
+	if tileData.couldBeMined: 
+		#instantiate Mark
+		var mark = MineableMark.instantiate() as Area2D
+		game_map.registerMineTarget(mark)
+		mark.top_level = true
+		mark_container.add_child(mark)
+		mark.global_position = tile - Vector2(4,4)
