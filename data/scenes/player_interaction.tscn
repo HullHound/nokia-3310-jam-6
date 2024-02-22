@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cc2doy4jxwid1"]
+[gd_scene load_steps=17 format=3 uid="uid://cc2doy4jxwid1"]
 
 [ext_resource type="Script" path="res://data/scenes/DirectionInputMover2D.gd" id="1_mf5f8"]
 [ext_resource type="Script" path="res://data/scenes/player_interaction.gd" id="1_uck3x"]
-[ext_resource type="Texture2D" uid="uid://b6j6yf41bxvc2" path="res://data/sprites/cursor.png" id="2_rksp3"]
+[ext_resource type="Texture2D" uid="uid://b4ye4pxy0vayx" path="res://data/sprites/SpriteSheet.png" id="3_0cksj"]
 [ext_resource type="Script" path="res://data/heartBeast/FiniteStateMachine/finite_state_machine.gd" id="3_daoh3"]
 [ext_resource type="Script" path="res://data/scenes/WaitForInput.gd" id="4_ikv5g"]
 [ext_resource type="Script" path="res://data/scenes/MarkMineable.gd" id="6_k1g88"]
@@ -12,6 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://i7u5wjemko5a" path="res://data/scenes/lair.tscn" id="9_egxim"]
 [ext_resource type="Texture2D" uid="uid://x04pg0rmamlm" path="res://data/sprites/buildingPlaceHolder.png" id="9_odyjl"]
 [ext_resource type="Script" path="res://data/scenes/Slap.gd" id="10_qjdb3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pssnl"]
+atlas = ExtResource("3_0cksj")
+region = Rect2(110, 62, 12, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6bbk"]
 atlas = ExtResource("9_odyjl")
@@ -54,7 +58,7 @@ bounds = Rect2(0, 0, 80, 48)
 movement_amount = 8
 
 [node name="Cursor" type="Sprite2D" parent="."]
-texture = ExtResource("2_rksp3")
+texture = SubResource("AtlasTexture_pssnl")
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("3_daoh3")
