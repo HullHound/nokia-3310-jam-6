@@ -16,12 +16,13 @@ func _enter_state() -> void:
 func _exit_state() -> void:
 	enabled = false	
 
-func _input(event: InputEvent) -> void:
+
+func _physics_process(delta: float) -> void:
 	if !enabled:
 		return
 
-	finished.emit()
-	
+	finished.emit()	
+
 func buildBuilding():
 	var node = BuildingPreFab.instantiate() as Node2D
 	node.global_position = build_place_holder.global_position
