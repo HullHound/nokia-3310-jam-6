@@ -23,6 +23,7 @@ hframes = 2
 script = ExtResource("2_ccbo1")
 spawn_location = NodePath("../SpawnLocation")
 spawn_prefab = ExtResource("3_ey1x8")
+max_number_of_spawns = 2
 
 [node name="SpawnLocation" type="Marker2D" parent="."]
 

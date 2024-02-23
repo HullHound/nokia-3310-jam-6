@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cc2doy4jxwid1"]
+[gd_scene load_steps=19 format=3 uid="uid://cc2doy4jxwid1"]
 
 [ext_resource type="Script" path="res://data/scenes/DirectionInputMover2D.gd" id="1_mf5f8"]
 [ext_resource type="Script" path="res://data/scenes/player_interaction.gd" id="1_uck3x"]
@@ -13,6 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://i7u5wjemko5a" path="res://data/scenes/lair.tscn" id="9_egxim"]
 [ext_resource type="Texture2D" uid="uid://x04pg0rmamlm" path="res://data/sprites/buildingPlaceHolder.png" id="9_odyjl"]
 [ext_resource type="Script" path="res://data/scenes/Slap.gd" id="10_qjdb3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iim7e"]
+atlas = ExtResource("3_0cksj")
+region = Rect2(32, 64, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pssnl"]
 atlas = ExtResource("3_0cksj")
@@ -43,6 +47,7 @@ animations = [{
 [node name="PlayerInteraction" type="Node2D"]
 position = Vector2(44, 28)
 script = ExtResource("1_uck3x")
+goblin_image = SubResource("AtlasTexture_iim7e")
 
 [node name="SlapRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)

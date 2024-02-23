@@ -6,6 +6,7 @@ signal died;
 
 @export var game_map: GameMap2D
 @export var team_id: int
+@export var image: Texture2D
 
 @onready var fsm: FiniteStateMachine = $FiniteStateMachine
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	search_for_target.game_map = game_map
 	move_nearby.game_map = game_map
 	move_to_target.game_map = game_map
+	$Sprite2D.texture = image
 	
 	search_for_target.target_found.connect(func(target): attack.set_target(target); move_to_target.target = target; fsm.change_state(move_to_target))
 	search_for_target.no_target_found.connect(fsm.change_state.bind(move_nearby))

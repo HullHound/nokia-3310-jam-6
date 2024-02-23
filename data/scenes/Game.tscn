@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bcl1afttwhcy1"]
+[gd_scene load_steps=22 format=3 uid="uid://bcl1afttwhcy1"]
 
 [ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_3orjx"]
 [ext_resource type="PackedScene" uid="uid://b7cgghr4mk2pa" path="res://data/scenes/dungeon_heart.tscn" id="3_osh5k"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cc2doy4jxwid1" path="res://data/scenes/player_interaction.tscn" id="8_7xjle"]
 [ext_resource type="Script" path="res://data/scenes/GameMap.gd" id="8_feotn"]
 [ext_resource type="PackedScene" uid="uid://b1fvhdp4123lx" path="res://data/scenes/goblin.tscn" id="8_r0k4v"]
+[ext_resource type="PackedScene" uid="uid://i7u5wjemko5a" path="res://data/scenes/lair.tscn" id="11_n1ehs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lo1o"]
 texture = ExtResource("4_eu0qo")
@@ -227,6 +228,7 @@ texture_region_size = Vector2i(8, 8)
 5:10/0/custom_data_8 = true
 11:1/0 = 0
 11:1/0/custom_data_6 = true
+11:1/0/custom_data_8 = true
 8:0/0 = 0
 8:0/0/terrain_set = 0
 8:0/0/terrain = 0
@@ -351,6 +353,14 @@ texture_region_size = Vector2i(8, 8)
 tile_size = Vector2i(8, 8)
 sources/2 = SubResource("TileSetAtlasSource_y4820")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2frao"]
+atlas = ExtResource("4_eu0qo")
+region = Rect2(72, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qaf8y"]
+atlas = ExtResource("4_eu0qo")
+region = Rect2(72, 80, 8, 8)
+
 [node name="Game" type="Node"]
 script = ExtResource("4")
 
@@ -407,6 +417,15 @@ layer_0/tile_data = PackedInt32Array(6, 262146, 0, 65542, 262146, 0, 131078, 262
 
 [node name="BuildContainer" type="Node2D" parent="GameMap"]
 
+[node name="Lair" parent="GameMap/BuildContainer" node_paths=PackedStringArray("spawn_container", "game_map") instance=ExtResource("11_n1ehs")]
+position = Vector2(84, 20)
+spawn_container = NodePath("..")
+goblin_image = SubResource("AtlasTexture_2frao")
+game_map = NodePath("../..")
+team_id = 1
+
+[node name="SpawnContainer" type="Node2D" parent="GameMap"]
+
 [node name="Imp" parent="." node_paths=PackedStringArray("game_map") instance=ExtResource("6_q88ia")]
 position = Vector2(12, 12)
 game_map = NodePath("../GameMap")
@@ -415,14 +434,14 @@ game_map = NodePath("../GameMap")
 position = Vector2(12, 36)
 game_map = NodePath("../GameMap")
 spawns = [NodePath("../Imp")]
-spawn_container = NodePath("../GameMap/BuildContainer")
+spawn_container = NodePath("../GameMap/SpawnContainer")
 max_number_of_spawns = 2
 
 [node name="EnemyDungeonHeart" parent="." node_paths=PackedStringArray("game_map", "spawn_container") instance=ExtResource("3_osh5k")]
 position = Vector2(76, 36)
 team_id = 1
 game_map = NodePath("../GameMap")
-spawn_container = NodePath("../GameMap/BuildContainer")
+spawn_container = NodePath("../GameMap/SpawnContainer")
 claim_search_property = "couldBeClaimed_Enemy"
 claim_neighbour_property = "claimedEnemy"
 claim_type = 2
@@ -431,11 +450,13 @@ claim_type = 2
 position = Vector2(68, 4)
 game_map = NodePath("../GameMap")
 team_id = 1
+image = SubResource("AtlasTexture_qaf8y")
 
-[node name="PlayerInteraction" parent="." node_paths=PackedStringArray("game_map", "build_container") instance=ExtResource("8_7xjle")]
+[node name="PlayerInteraction" parent="." node_paths=PackedStringArray("game_map", "build_container", "spawn_container") instance=ExtResource("8_7xjle")]
 z_index = 50
 game_map = NodePath("../GameMap")
 build_container = NodePath("../GameMap/BuildContainer")
+spawn_container = NodePath("../GameMap/SpawnContainer")
 
 [node name="UI" type="Control" parent="PlayerInteraction"]
 layout_mode = 3

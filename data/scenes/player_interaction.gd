@@ -13,7 +13,9 @@ extends Node2D
 
 @export var game_map: GameMap2D
 @export var build_container: Node2D
+@export var spawn_container: Node2D
 @export var team_id: int = 0
+@export var goblin_image: Texture2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,5 +39,6 @@ func _ready() -> void:
 func _on_build_building_build_callback(node: Node2D) -> void:
 	var lair = node as Lair
 	lair.game_map = game_map
-	lair.spawn_container = build_container
+	lair.spawn_container = spawn_container
 	lair.team_id = team_id
+	lair.goblin_image = goblin_image
