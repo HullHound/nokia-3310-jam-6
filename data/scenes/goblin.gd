@@ -37,6 +37,7 @@ func _ready() -> void:
 	move_nearby.target_reached.connect(fsm.change_state.bind(search_for_target))
 	move_nearby.target_unreachable.connect(fsm.change_state.bind(search_for_target))
 
+	$FogOfWarRemover.enabled = team_id == 0
 	$FogOfWarRemover.remove_fog_of_war()
 	game_map.setSolid(global_position)
 
