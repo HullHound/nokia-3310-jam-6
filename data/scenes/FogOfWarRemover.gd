@@ -10,7 +10,10 @@ func remove_fog_of_war():
 	
 	var current_tile = global_position
 	
-	for x in range(current_tile.x -tile_size, current_tile.x + 2 * tile_size, tile_size):
-		for y in range(current_tile.y - tile_size, current_tile.y + 2 * tile_size, tile_size):
-			var coords: Vector2 = Vector2(x,y)
-			game_map.markVisible(coords)
+	for x in range(current_tile.x - 2 * tile_size, current_tile.x + 3 * tile_size, tile_size):
+		for y in range(current_tile.y - 2 * tile_size, current_tile.y + 3 * tile_size, tile_size):
+			var manhatten_distance = abs(current_tile.x - x) + abs(current_tile.y - y)
+			
+			if manhatten_distance <= tile_size * 2:
+				var coords: Vector2 = Vector2(x,y)
+				game_map.markVisible(coords)
