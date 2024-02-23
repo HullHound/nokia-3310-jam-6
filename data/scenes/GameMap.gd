@@ -151,7 +151,7 @@ func setTile(tile: Vector2, tileType: TileType):
 	
 	match tileType:
 		TileType.ClaimedPlayer:
-			tileMap.set_cell(0, location, tile_map_wall_layer, claimedPlayer_atlas_coords)
+			tileMap.set_cell(tile_map_wall_layer, location, 1, claimedPlayer_atlas_coords)
 			astar_grid.set_point_solid(location, false)
 		TileType.ClaimedEnemy:
 			tileMap.set_cell(0, location, tile_map_wall_layer, claimedEnemy_atlas_coords)

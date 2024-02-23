@@ -2,7 +2,7 @@ extends Node2D
 
 @export var game_map: GameMap2D
 @export var tile_size = 8
-@export var enabled = true
+@export var enabled = true	
 
 func remove_fog_of_war():
 	if !enabled:
