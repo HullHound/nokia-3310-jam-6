@@ -98,8 +98,9 @@ libraries = {
 script = ExtResource("7_7lavw")
 state = NodePath("SearchForTarget")
 
-[node name="SearchForTarget" type="Node" parent="FiniteStateMachine"]
+[node name="SearchForTarget" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]
 script = ExtResource("8_1r0vn")
+agent = NodePath("../..")
 
 [node name="MoveToTarget" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]
 script = ExtResource("9_pir2q")
