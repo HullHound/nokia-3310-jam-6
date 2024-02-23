@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://i7u5wjemko5a"]
 
-[ext_resource type="Texture2D" uid="uid://x04pg0rmamlm" path="res://data/sprites/buildingPlaceHolder.png" id="1_1whwa"]
 [ext_resource type="Script" path="res://data/scenes/lair.gd" id="1_eba4m"]
 [ext_resource type="Script" path="res://data/scenes/Spawner.gd" id="2_ccbo1"]
+[ext_resource type="Texture2D" uid="uid://b4ye4pxy0vayx" path="res://data/sprites/SpriteSheet.png" id="2_t70tq"]
 [ext_resource type="PackedScene" uid="uid://b1fvhdp4123lx" path="res://data/scenes/goblin.tscn" id="3_ey1x8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hcg5"]
-atlas = ExtResource("1_1whwa")
-region = Rect2(0, 0, 48, 24)
+atlas = ExtResource("2_t70tq")
+region = Rect2(88, 96, 24, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lr8xg"]
 size = Vector2(24, 24)
@@ -17,7 +17,6 @@ script = ExtResource("1_eba4m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_2hcg5")
-hframes = 2
 
 [node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("spawn_location")]
 script = ExtResource("2_ccbo1")
