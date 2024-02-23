@@ -141,7 +141,7 @@ func getTileData(tile:Vector2) -> GameTileData:
 	
 func clearTile(tile: Vector2):
 	var location = tileMap.local_to_map(tile)
-	tileMap.erase_cell(tile_map_wall_layer, location)
+	#tileMap.erase_cell(tile_map_wall_layer, location)
 	astar_grid.set_point_solid(location, false)
 	tileMap.set_cells_terrain_connect(tile_map_wall_layer, [location], 0, -1)
 	
