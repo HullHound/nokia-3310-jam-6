@@ -57,7 +57,6 @@ func _on_enemy_detector_area_entered(area: Area2D) -> void:
 	if area is DamageTarget2D:
 		var target = area as DamageTarget2D
 		if target.team_id != team_id:
-			print('detected')
 			attack.set_target(target);
 			move_to_target.target = target;
 			fsm.change_state(move_to_target)

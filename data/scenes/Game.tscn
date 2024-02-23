@@ -419,7 +419,7 @@ layer_0/tile_data = PackedInt32Array(6, 262146, 0, 65542, 262146, 0, 131078, 262
 
 [node name="Lair" parent="GameMap/BuildContainer" node_paths=PackedStringArray("spawn_container", "game_map") instance=ExtResource("11_n1ehs")]
 position = Vector2(84, 20)
-spawn_container = NodePath("..")
+spawn_container = NodePath("../../SpawnContainer")
 goblin_image = SubResource("AtlasTexture_2frao")
 game_map = NodePath("../..")
 team_id = 1
@@ -430,6 +430,7 @@ team_id = 1
 position = Vector2(12, 36)
 game_map = NodePath("../GameMap")
 spawn_container = NodePath("../GameMap/SpawnContainer")
+max_number_of_spawns = 2
 
 [node name="EnemyDungeonHeart" parent="." node_paths=PackedStringArray("game_map", "spawn_container") instance=ExtResource("3_osh5k")]
 position = Vector2(76, 60)
