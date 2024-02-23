@@ -30,5 +30,6 @@ func set_target(new_target: DamageTarget2D):
 	target = new_target
 
 func attack():
-	target.damage(damage_amount)
+	if target != null:
+		target.damage(damage_amount)
 	time_since_last_attack = 0.0

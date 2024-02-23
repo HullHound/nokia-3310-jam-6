@@ -6,6 +6,7 @@ func _physics_process(delta):
 	if !enabled:
 		return
 
-	super.set_target(target.global_position)
+	if target != null:
+		super.set_target(target.global_position)
 	
 	super(delta)
