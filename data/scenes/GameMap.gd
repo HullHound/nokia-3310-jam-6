@@ -9,7 +9,7 @@ class_name GameMap2D
 @export var heuristic = AStarGrid2D.HEURISTIC_MANHATTAN 
 @export var offset = Vector2(4,-4)
 
-var tile_map_wall_layer = 1
+var tile_map_wall_layer = 0
 @export var tile_map_layer = 3
 
 @export_group("Atlas Coords")

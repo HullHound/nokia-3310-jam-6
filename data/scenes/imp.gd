@@ -25,7 +25,7 @@ signal died;
 
 @onready var health: Health = $Health
 
-# Called when the node enters the scene tree for the first time.	
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$DamageTarget2D.team_id = team_id
 	$FogOfWarRemover.game_map = game_map
@@ -62,10 +62,6 @@ func _ready() -> void:
 	$FogOfWarRemover.remove_fog_of_war()	
 	game_map.setSolid(global_position)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func die():
 	died.emit()
 	queue_free()
@@ -73,8 +69,6 @@ func die():
 func _on_damage_target_2d_damaged(damage_amount: float) -> void:
 	$AnimationPlayer.play("damaged")
 	health.decrement_health(damage_amount)
-	
-
 
 func _on_mine_gold_mined() -> void:
 	print("gold Mined")

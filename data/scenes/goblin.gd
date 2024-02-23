@@ -40,10 +40,6 @@ func _ready() -> void:
 	$FogOfWarRemover.remove_fog_of_war()
 	game_map.setSolid(global_position)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func die():
 	died.emit()
 	queue_free()

@@ -15,6 +15,7 @@ signal died;
 @export_group("Imp Details")
 @export var spawns: Array[Node2D]
 @export var spawn_container: Node2D
+@export var max_number_of_spawns = 0
 
 @export var claim_search_property: String = "couldBeClaimed_Player"
 @export var claim_neighbour_property: String = "claimedPlayer"
@@ -24,6 +25,7 @@ signal died;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawner.max_number_of_spawns = max_number_of_spawns
 	spawner.spawns = spawns
 	spawner.spawn_container = spawn_container
 	
@@ -32,15 +34,13 @@ func _ready() -> void:
 		$FogOfWarRemover.remove_fog_of_war()
 		
 	game_map.setSolid(global_position)	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	
+	spawner.start_spawn()
 
 func die():
 	died.emit()
 
-func _on_damage_target_2d_damaged(damage_amount: float) -> void:
+func _on_damage_target_2d_damaged(_damage_amount: float) -> void:
 	$AnimationPlayer.play("damaged")
 	$AnimationPlayer.queue("heart_beat")
 

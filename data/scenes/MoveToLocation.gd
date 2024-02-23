@@ -21,10 +21,6 @@ func _ready() -> void:
 func set_target(location: Vector2):
 	destination = location
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _enter_state() -> void:
 	enabled = true
 	time_since_last_movement = 0.0

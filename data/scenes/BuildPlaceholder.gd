@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if canBuild():
 		animated_sprite_2d.frame = ok_frame;
 	else:
@@ -25,15 +25,15 @@ func _physics_process(delta: float) -> void:
 func canBuild():
 	var tiles = game_map.getAllSurroundingTiles(global_position);
 	
-	var canBuild = true
+	var canBuildIt = true
 	
 	for tile in tiles:
 		if !game_map.getTileData(tile)[canBeBuiltOnProperty]:
-			canBuild = false
+			canBuildIt = false
 			
 	for raycast: RayCast2D in ray_casts.get_children():
 		if raycast.is_colliding():
-			canBuild = false
+			canBuildIt = false
 			
-	return canBuild
+	return canBuildIt
 			

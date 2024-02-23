@@ -14,11 +14,6 @@ func _ready() -> void:
 	spawner.spawns = spawns
 	spawner.spawn_container = spawn_container
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_spawner_spawn_callback(node: Node2D) -> void:
 	
 	var goblin = node as Goblin;

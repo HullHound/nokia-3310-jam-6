@@ -17,7 +17,7 @@ func _exit_state() -> void:
 
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if !enabled:
 		return
 	
@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 func pick_claim_target():
 	var potentialTargets: Array[Vector2] = game_map.getTilesWithProperty(search_property)
 	potentialTargets.shuffle()
-
+	
 	var target = null
 	for item in potentialTargets:
 		#if !game_map.isVisible(item):

@@ -34,11 +34,6 @@ func _ready() -> void:
 	build_building.finished.connect(fsm.change_state.bind(wait_for_input))
 	slap.finished.connect(fsm.change_state.bind(wait_for_input))
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_build_building_build_callback(node: Node2D) -> void:
 	var lair = node as Lair
 	lair.game_map = game_map
