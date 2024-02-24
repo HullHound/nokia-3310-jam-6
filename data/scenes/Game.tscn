@@ -498,7 +498,6 @@ offset_left = 0.0
 offset_right = 12.0
 
 [node name="MessageDisplay" parent="PlayerInteraction/UI" instance=ExtResource("13_8ld0n")]
-visible = false
 layout_mode = 0
 offset_left = 12.0
 offset_right = 84.0
@@ -508,6 +507,7 @@ visible = false
 
 [node name="MessageTriggers" type="Node" parent="."]
 script = ExtResource("14_0mlpp")
+random_quips = Array[String](["Are you sure you want to do that?", "There's that smell again...", "Hello?", "Achoo!", "Something odd is happening!", "Your dungeon is on an incline!", "Your minions want chocolate!"])
 
 [connection signal="died" from="GameField/InitialObjects/PlayerDungeonHeart" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="health_changed" from="GameField/InitialObjects/PlayerDungeonHeart" to="PlayerInteraction/UI/HUD" method="updateHealth"]
