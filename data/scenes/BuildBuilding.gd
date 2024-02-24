@@ -4,6 +4,8 @@ extends State
 @export var BuildingPreFab: PackedScene
 @export var build_container: Node2D
 
+const GOOD_3 = preload("res://data/sounds/good3.wav")
+
 var enabled = false
 
 signal finished
@@ -29,5 +31,6 @@ func buildBuilding():
 	
 	build_callback.emit(node)
 	build_container.add_child(node)
+	AudioManager.play_sfx(GOOD_3)
 
 	#TODO = Particle Effet / Sound / Animation

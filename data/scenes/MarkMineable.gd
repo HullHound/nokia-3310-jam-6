@@ -7,6 +7,9 @@ extends State
 @export var MineableMark: PackedScene
 @export var mark_container: Node2D
 
+const BLIP_9 = preload("res://data/sounds/blip9.wav")
+const BLIP_14 = preload("res://data/sounds/blip14.wav")
+
 var enabled = false
 
 signal finished
@@ -35,6 +38,7 @@ func markAsMineable() -> void:
 		var mark = MineRayCast.get_collider() as Area2D
 		game_map.clearMineTarget(mark)
 		mark.queue_free()
+		AudioManager.play_sfx(BLIP_14)
 		return
 	
 	var tileData = game_map.getTileData(tile)
@@ -46,3 +50,4 @@ func markAsMineable() -> void:
 		mark.top_level = true
 		mark_container.add_child(mark)
 		mark.global_position = tile - Vector2(4,4)
+		AudioManager.play_sfx(BLIP_9)

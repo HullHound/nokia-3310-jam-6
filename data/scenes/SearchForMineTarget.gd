@@ -38,7 +38,6 @@ func pick_claim_target():
 		target = item
 		
 	if target != null:
-		print('mine target found')
 		target_found.emit(target)
 	elif target == null:
 		no_target_found.emit()
