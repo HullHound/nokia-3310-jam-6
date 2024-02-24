@@ -130,4 +130,5 @@ position = Vector2(0, -8)
 [connection signal="damaged" from="DamageTarget2D" to="." method="_on_damage_target_2d_damaged"]
 [connection signal="damaged" from="DamageTarget2D" to="Health" method="decrement_health"]
 [connection signal="died" from="Health" to="." method="die"]
+[connection signal="health_changed" from="Health" to="." method="_on_health_health_changed"]
 [connection signal="spawn_callback" from="Spawner" to="." method="_on_spawner_spawn_callback"]

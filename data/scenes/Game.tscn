@@ -483,12 +483,15 @@ size_flags_vertical = 3
 theme = ExtResource("2_3orjx")
 metadata/_edit_use_anchors_ = true
 
+[node name="HUD" parent="PlayerInteraction/UI" instance=ExtResource("12_rl2bp")]
+layout_mode = 0
+offset_left = 0.0
+offset_right = 12.0
+
 [node name="EndScreen" parent="PlayerInteraction/UI" instance=ExtResource("4_q48f5")]
 visible = false
 
-[node name="HUD" parent="PlayerInteraction/UI" instance=ExtResource("12_rl2bp")]
-layout_mode = 0
-
 [connection signal="died" from="GameField/InitialObjects/PlayerDungeonHeart" to="." method="_on_player_dungeon_heart_died"]
+[connection signal="health_changed" from="GameField/InitialObjects/PlayerDungeonHeart" to="PlayerInteraction/UI/HUD" method="updateHealth"]
 [connection signal="died" from="GameField/InitialObjects/EnemyDungeonHeart" to="." method="_on_enemy_dungeon_heart_died"]
 [connection signal="restart_requested" from="PlayerInteraction/UI/EndScreen" to="." method="_on_end_screen_restart_requested"]

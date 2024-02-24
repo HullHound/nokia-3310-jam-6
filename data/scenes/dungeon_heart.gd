@@ -1,8 +1,7 @@
 extends Node2D
 
 signal died;
-
-
+signal health_changed(new_health:int)
 
 @export var team_id: int :
 	set(value):
@@ -55,3 +54,7 @@ func _on_spawner_spawn_callback(node: Node2D) -> void:
 	imp.claim_type = claim_type
 	
 	imp.died.connect($Spawner.remove_spawn.bind(node))
+
+
+func _on_health_health_changed(change_amount: float) -> void:
+	health_changed.emit($Health.get_health())

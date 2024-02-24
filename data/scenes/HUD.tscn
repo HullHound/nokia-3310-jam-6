@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://djq31hr0b205"]
+[gd_scene load_steps=7 format=3 uid="uid://djq31hr0b205"]
 
 [ext_resource type="Texture2D" uid="uid://7h7ujfkn4cf1" path="res://data/sprites/heart-01.png" id="1_dbclf"]
+[ext_resource type="Script" path="res://data/scenes/HUD.gd" id="1_nm8sv"]
 [ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_dni8m"]
 [ext_resource type="Texture2D" uid="uid://b4ye4pxy0vayx" path="res://data/sprites/SpriteSheet.png" id="3_3imh6"]
 
@@ -17,6 +18,7 @@ offset_left = 72.0
 offset_right = 84.0
 offset_bottom = 48.0
 color = Color(0, 0, 0, 1)
+script = ExtResource("1_nm8sv")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0

@@ -18,3 +18,6 @@ func decrement_health(amount:float):
 	
 	if current_health <= 0.0:
 		died.emit()
+
+func get_health():
+	return current_health
