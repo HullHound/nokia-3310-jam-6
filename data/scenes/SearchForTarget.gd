@@ -31,6 +31,9 @@ func _physics_process(_delta: float) -> void:
 			
 		if !game_map.isVisible(convertedItem.global_position):
 			continue;
+			
+		if !game_map.getPathAdjacentTo(agent.global_position, convertedItem.global_position):
+			continue
 		
 		var current_manhatten_distance = abs(convertedItem.global_position.x - agent.global_position.x) + abs(convertedItem.global_position.y - agent.global_position.y)
 		

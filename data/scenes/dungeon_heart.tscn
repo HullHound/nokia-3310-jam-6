@@ -87,6 +87,11 @@ size = Vector2(8, 8)
 
 [node name="DungeonHeart" type="Node2D"]
 script = ExtResource("1_odn4d")
+team_id = null
+max_number_of_spawns = null
+claim_search_property = null
+claim_neighbour_property = null
+claim_type = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("4_od2jv")

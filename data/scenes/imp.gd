@@ -70,6 +70,8 @@ func die():
 		AudioManager.play_sfx(CRUST)
 		MessageSystem.displayMessage("Your minions lost a battle")
 		
+		
+	game_map.setSolid(global_position, false)
 	died.emit()
 	queue_free()
 

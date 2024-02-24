@@ -105,6 +105,19 @@ func getPath(start: Vector2, destination: Vector2):
 
 	return output
 	
+func getPathAdjacentTo(start: Vector2, destination: Vector2):
+	var destinations = getNeighbours(destination)
+		
+	var shortestPathLength = 99999999
+	var shortestPath: PackedVector2Array = []
+	for actual_destination in destinations:
+		var path = getPath(start, actual_destination)
+		
+		if path.size() < shortestPathLength && path.size() > 0:
+			shortestPathLength = path.size()
+			shortestPath = path
+			
+	return shortestPath
 	
 func setSolid(location: Vector2, solid: bool = true):
 	var tile = tileMap.local_to_map(location)
@@ -124,7 +137,9 @@ func getTileData(tile:Vector2) -> GameTileData:
 	var tileData = tileMap.get_cell_tile_data(tile_map_wall_layer, position)
 
 	if tileData == null:
-		return GameTileData.new() # or null?
+		var gameData1 = GameTileData.new()
+		gameData1.isWalkable = true
+		return gameData1
 	
 	var gameData = GameTileData.new()
 	gameData.containsGold = tileData.get_custom_data("Gold")
@@ -152,8 +167,8 @@ func setTile(tile: Vector2, tileType: TileType):
 	
 	match tileType:
 		TileType.ClaimedPlayer:
-			tileMap.set_cell(tile_map_wall_layer, location, 1, claimedPlayer_atlas_coords)
 			astar_grid.set_point_solid(location, false)
+			tileMap.set_cell(tile_map_wall_layer, location, 1, claimedPlayer_atlas_coords)
 		TileType.ClaimedEnemy:
 			tileMap.set_cell(0, location, tile_map_wall_layer, claimedEnemy_atlas_coords)
 			astar_grid.set_point_solid(location, false)

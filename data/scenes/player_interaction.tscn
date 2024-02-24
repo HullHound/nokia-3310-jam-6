@@ -60,7 +60,7 @@ collide_with_bodies = false
 [node name="DirectionInputMover2D" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("1_mf5f8")
 target = NodePath("..")
-bounds = Rect2(0, 0, 80, 48)
+bounds = Rect2(0, 0, 240, 144)
 movement_amount = 8
 
 [node name="Cursor" type="Sprite2D" parent="."]

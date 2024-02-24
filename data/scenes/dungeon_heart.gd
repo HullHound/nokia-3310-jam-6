@@ -58,3 +58,6 @@ func _on_spawner_spawn_callback(node: Node2D) -> void:
 
 func _on_health_health_changed(_change_amount: float) -> void:
 	health_changed.emit($Health.get_health())
+	
+func remove_from_spawner(agent: Node2D):
+	$Spawner.remove_spawn(agent)

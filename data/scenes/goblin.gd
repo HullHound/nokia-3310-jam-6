@@ -51,6 +51,7 @@ func die():
 	else:
 		MessageSystem.displayMessage("Your creatures have won a battle")
 	
+	game_map.setSolid(global_position, false)
 	died.emit()
 	queue_free()
 

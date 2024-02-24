@@ -8,6 +8,8 @@ const JINGLE_1 = preload("res://data/sounds/jingle1.wav")
 
 func _ready() -> void:
 	MessageSystem.displayMessage('I hope you read the instructions?')
+	$GameField/InitialObjects/Imp.died.connect($GameField/InitialObjects/PlayerDungeonHeart.remove_from_spawner.bind($GameField/InitialObjects/Imp))
+	$GameField/InitialObjects/Imp2.died.connect($GameField/InitialObjects/PlayerDungeonHeart.remove_from_spawner.bind($GameField/InitialObjects/Imp2))
 	pass #AudioManager.play_music(music)
 	
 func _on_player_dungeon_heart_died() -> void:
