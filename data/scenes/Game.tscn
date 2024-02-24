@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bcl1afttwhcy1"]
+[gd_scene load_steps=25 format=3 uid="uid://bcl1afttwhcy1"]
 
 [ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_3orjx"]
 [ext_resource type="PackedScene" uid="uid://b7cgghr4mk2pa" path="res://data/scenes/dungeon_heart.tscn" id="3_osh5k"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://b1fvhdp4123lx" path="res://data/scenes/goblin.tscn" id="8_r0k4v"]
 [ext_resource type="PackedScene" uid="uid://i7u5wjemko5a" path="res://data/scenes/lair.tscn" id="11_n1ehs"]
 [ext_resource type="PackedScene" uid="uid://djq31hr0b205" path="res://data/scenes/HUD.tscn" id="12_rl2bp"]
+[ext_resource type="PackedScene" uid="uid://p8l6uj7e32wy" path="res://data/scenes/message_system.tscn" id="13_8ld0n"]
+[ext_resource type="Script" path="res://data/scenes/MessageTriggers.gd" id="14_0mlpp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lo1o"]
 texture = ExtResource("4_eu0qo")
@@ -217,6 +219,7 @@ texture_region_size = Vector2i(8, 8)
 13:6/0/custom_data_4 = true
 1:8/0 = 0
 1:8/0/custom_data_1 = true
+1:8/0/custom_data_5 = true
 1:10/0 = 0
 1:10/0/custom_data_0 = true
 1:10/0/custom_data_3 = true
@@ -488,8 +491,16 @@ layout_mode = 0
 offset_left = 0.0
 offset_right = 12.0
 
+[node name="MessageDisplay" parent="PlayerInteraction/UI" instance=ExtResource("13_8ld0n")]
+layout_mode = 0
+offset_left = 12.0
+offset_right = 84.0
+
 [node name="EndScreen" parent="PlayerInteraction/UI" instance=ExtResource("4_q48f5")]
 visible = false
+
+[node name="MessageTriggers" type="Node" parent="."]
+script = ExtResource("14_0mlpp")
 
 [connection signal="died" from="GameField/InitialObjects/PlayerDungeonHeart" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="health_changed" from="GameField/InitialObjects/PlayerDungeonHeart" to="PlayerInteraction/UI/HUD" method="updateHealth"]

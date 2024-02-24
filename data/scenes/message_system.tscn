@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://p8l6uj7e32wy"]
+
+[ext_resource type="Script" path="res://data/scenes/message_system.gd" id="1_br0ny"]
+[ext_resource type="Texture2D" uid="uid://b4ye4pxy0vayx" path="res://data/sprites/SpriteSheet.png" id="1_rdeoq"]
+[ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_qy26t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mb5j1"]
+atlas = ExtResource("1_rdeoq")
+region = Rect2(88, 96, 24, 24)
+
+[node name="MessageDisplay" type="ColorRect"]
+offset_right = 72.0
+offset_bottom = 16.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_br0ny")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 16.0
+texture = SubResource("AtlasTexture_mb5j1")
+draw_center = false
+region_rect = Rect2(0, 0, 24, 24)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 70.0
+offset_bottom = 14.0
+theme = ExtResource("2_qy26t")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+autowrap_mode = 2
