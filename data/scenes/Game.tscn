@@ -381,7 +381,7 @@ grow_vertical = 2
 
 [node name="GameField" type="Node2D" parent="."]
 
-[node name="GameMap" type="Node" parent="GameField"]
+[node name="GameMap" type="Node2D" parent="GameField"]
 script = ExtResource("8_feotn")
 region = Rect2i(0, 0, 100, 40)
 cell_size = Vector2(1, 1)
