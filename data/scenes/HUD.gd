@@ -9,6 +9,7 @@ func _ready() -> void:
 
 func updateHealth(new_health: int):
 	$HeartLabel.text = str(new_health)
+	$HeartAnimationPlayer.play("HeartFlash")
 
 func updateGold(new_gold: int):
 	$GoldLabel.text = str(new_gold)
