@@ -47,6 +47,10 @@ func _ready() -> void:
 func die():
 	if team_id == 0:
 		AudioManager.play_sfx(CRUST)
+		MessageSystem.displayMessage("Your minions lost a battle")
+	else:
+		MessageSystem.displayMessage("Your creatures have won a battle")
+	
 	died.emit()
 	queue_free()
 

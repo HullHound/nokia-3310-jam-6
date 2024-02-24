@@ -453,6 +453,12 @@ game_map = NodePath("../../GameMap")
 team_id = 1
 image = SubResource("AtlasTexture_qaf8y")
 
+[node name="Goblin4" parent="GameField/InitialObjects" node_paths=PackedStringArray("game_map") instance=ExtResource("8_r0k4v")]
+position = Vector2(84, 4)
+game_map = NodePath("../../GameMap")
+team_id = 1
+image = SubResource("AtlasTexture_qaf8y")
+
 [node name="Goblin2" parent="GameField/InitialObjects" node_paths=PackedStringArray("game_map") instance=ExtResource("8_r0k4v")]
 position = Vector2(76, 4)
 game_map = NodePath("../../GameMap")
@@ -492,6 +498,7 @@ offset_left = 0.0
 offset_right = 12.0
 
 [node name="MessageDisplay" parent="PlayerInteraction/UI" instance=ExtResource("13_8ld0n")]
+visible = false
 layout_mode = 0
 offset_left = 12.0
 offset_right = 84.0
