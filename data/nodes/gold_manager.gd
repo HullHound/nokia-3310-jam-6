@@ -2,6 +2,7 @@ extends Node
 class_name GoldManager
 
 signal gold_value_changed(new_value: int)
+signal not_enough_gold
 
 var gold_value = 0
 
@@ -18,4 +19,5 @@ func decrease_gold(value:int) -> bool:
 		gold_value_changed.emit(gold_value)
 		return true
 		
+	not_enough_gold.emit()
 	return false

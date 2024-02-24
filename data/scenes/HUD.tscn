@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://djq31hr0b205"]
+[gd_scene load_steps=12 format=3 uid="uid://djq31hr0b205"]
 
 [ext_resource type="Texture2D" uid="uid://7h7ujfkn4cf1" path="res://data/sprites/heart-01.png" id="1_dbclf"]
 [ext_resource type="Script" path="res://data/scenes/HUD.gd" id="1_nm8sv"]
 [ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_dni8m"]
 [ext_resource type="Texture2D" uid="uid://b4ye4pxy0vayx" path="res://data/sprites/SpriteSheet.png" id="3_3imh6"]
+[ext_resource type="Material" uid="uid://caabkyh33pd4j" path="res://data/shader/NokiaMaterial.tres" id="5_xg4we"]
+[ext_resource type="Material" uid="uid://yudv6e212hb6" path="res://data/shader/NokiaMaterial_Inverted.tres" id="6_c580k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_46dv7"]
 atlas = ExtResource("3_3imh6")
@@ -12,6 +14,43 @@ region = Rect2(88, 96, 24, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4d0vf"]
 atlas = ExtResource("3_3imh6")
 region = Rect2(8, 64, 8, 8)
+
+[sub_resource type="Animation" id="Animation_fe3ku"]
+resource_name = "Flash"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gold:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_xg4we"), ExtResource("6_c580k"), ExtResource("5_xg4we"), ExtResource("6_c580k"), ExtResource("5_xg4we")]
+}
+
+[sub_resource type="Animation" id="Animation_rgtov"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gold:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_xg4we")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gkg4g"]
+_data = {
+"Flash": SubResource("Animation_fe3ku"),
+"RESET": SubResource("Animation_rgtov")
+}
 
 [node name="ColorRect" type="ColorRect"]
 offset_left = 72.0
@@ -48,6 +87,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "5"
 
 [node name="Gold" type="Sprite2D" parent="."]
+material = ExtResource("5_xg4we")
 position = Vector2(6, 30)
 texture = SubResource("AtlasTexture_4d0vf")
 
@@ -61,3 +101,8 @@ theme = ExtResource("2_dni8m")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "0"
 horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gkg4g")
+}
