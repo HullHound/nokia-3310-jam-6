@@ -1,5 +1,6 @@
 extends State
 
+@export var agent: Node2D
 @export var game_map: GameMap2D
 
 signal target_found(target: Vector2)
@@ -28,6 +29,7 @@ func pick_claim_target():
 	potentialTargets.shuffle()
 	
 	var target = null
+	var distanceToTarget = 9999999999999999
 	for item in potentialTargets:
 		#if !game_map.isVisible(item):
 		#	continue;
@@ -44,9 +46,13 @@ func pick_claim_target():
 		if !adjacent_to_claimed_tile:
 			continue;
 			
-		# TODO - Distance Check - prioritise closer? / Closer to Dungeon Heart?
+		var current_manhatten_distance = abs(item.x - agent.global_position.x) + abs(item.y - agent.global_position.y)
 		
+		if  current_manhatten_distance > distanceToTarget: # Pick the closer one
+			continue
+					
 		target = item
+		distanceToTarget = current_manhatten_distance
 	
 	if target != null:
 		target_found.emit(target)

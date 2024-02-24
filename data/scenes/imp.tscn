@@ -151,8 +151,9 @@ state = NodePath("SearchForMineTarget")
 script = ExtResource("8_34mra")
 agent = NodePath("../..")
 
-[node name="SearchForClaimTarget" type="Node" parent="FiniteStateMachine"]
+[node name="SearchForClaimTarget" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]
 script = ExtResource("12_tpm0u")
+agent = NodePath("../..")
 
 [node name="MoveToClaimTarget" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("agent")]
 script = ExtResource("9_w8esl")
