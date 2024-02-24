@@ -3,13 +3,12 @@ extends ColorRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	GoldTreasury.gold_value_changed.connect(updateGold)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func updateHealth(new_health: int):
 	$HeartLabel.text = str(new_health)
+
+func updateGold(new_gold: int):
+	$GoldLabel.text = str(new_gold)

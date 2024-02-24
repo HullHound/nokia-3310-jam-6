@@ -21,4 +21,5 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_released("Confirm"):
 		if build_place_holder.canBuild():
-			build.emit()
+			if GoldTreasury.decrease_gold(5):
+				build.emit()

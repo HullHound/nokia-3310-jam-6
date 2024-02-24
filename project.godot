@@ -20,6 +20,7 @@ config/icon="res://icon.png"
 [autoload]
 
 AudioManager="*res://data/autoload/AudioManager.gd"
+GoldTreasury="*res://data/nodes/gold_manager.gd"
 
 [debug]
 

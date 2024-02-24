@@ -56,5 +56,5 @@ func _on_spawner_spawn_callback(node: Node2D) -> void:
 	imp.died.connect($Spawner.remove_spawn.bind(node))
 
 
-func _on_health_health_changed(change_amount: float) -> void:
+func _on_health_health_changed(_change_amount: float) -> void:
 	health_changed.emit($Health.get_health())
