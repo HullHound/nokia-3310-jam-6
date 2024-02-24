@@ -20,6 +20,7 @@ var tile_map_wall_layer = 0
 @export var selected_wall_atlas_coords: Vector2i
 @export var gold_wall_atlas_coords: Vector2i
 @export var selected_gold_wall_atlas_coords: Vector2i
+@export var blank_tile_atlas_coords: Vector2i
 
 @export var replace_walls_workaround: Array[Vector2i]
 
@@ -144,7 +145,7 @@ func clearTile(tile: Vector2):
 	#tileMap.erase_cell(tile_map_wall_layer, location)
 	astar_grid.set_point_solid(location, false)
 	tileMap.set_cells_terrain_connect(tile_map_wall_layer, [location], 0, -1)
-	
+	tileMap.set_cell(tile_map_wall_layer, location, 1, blank_tile_atlas_coords)
 
 func setTile(tile: Vector2, tileType: TileType):	
 	var location = tileMap.local_to_map(tile)
