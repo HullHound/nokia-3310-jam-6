@@ -434,7 +434,7 @@ spawn_container = NodePath("../../GameMap/SpawnContainer")
 max_number_of_spawns = 2
 
 [node name="EnemyDungeonHeart" parent="GameField/InitialObjects" node_paths=PackedStringArray("game_map", "spawn_container") instance=ExtResource("3_osh5k")]
-position = Vector2(20, 4)
+position = Vector2(68, 68)
 team_id = 1
 game_map = NodePath("../../GameMap")
 spawn_container = NodePath("../../GameMap/SpawnContainer")
@@ -449,7 +449,7 @@ team_id = 1
 image = SubResource("AtlasTexture_qaf8y")
 
 [node name="Goblin2" parent="GameField/InitialObjects" node_paths=PackedStringArray("game_map") instance=ExtResource("8_r0k4v")]
-position = Vector2(76, 44)
+position = Vector2(76, 4)
 game_map = NodePath("../../GameMap")
 image = ExtResource("8_qgph3")
 

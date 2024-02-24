@@ -16,7 +16,8 @@ signal died;
 @onready var move_nearby: Node = $FiniteStateMachine/MoveNearby
 
 @onready var health: Health = $Health
-
+const CRUST = preload("res://data/sounds/crust.wav")
+const HIT_1 = preload("res://data/sounds/hit1.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,11 +45,15 @@ func _ready() -> void:
 	game_map.setSolid(global_position)
 
 func die():
+	if team_id == 0:
+		AudioManager.play_sfx(CRUST)
 	died.emit()
 	queue_free()
 
 func _on_damage_target_2d_damaged(damage_amount: float) -> void:
 	$AnimationPlayer.play("damaged")
+	if team_id == 0:
+		AudioManager.play_sfx(HIT_1)
 	health.decrement_health(damage_amount)
 	
 
