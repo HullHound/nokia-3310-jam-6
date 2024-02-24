@@ -7,6 +7,7 @@ const JINGLE_1 = preload("res://data/sounds/jingle1.wav")
 @onready var game_field: Node2D = $GameField
 
 func _ready() -> void:
+	MessageSystem.displayMessage('I hope you read the instructions?')
 	pass #AudioManager.play_music(music)
 	
 func _on_player_dungeon_heart_died() -> void:
