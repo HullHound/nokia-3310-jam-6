@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bcl1afttwhcy1"]
+[gd_scene load_steps=23 format=3 uid="uid://bcl1afttwhcy1"]
 
 [ext_resource type="Theme" uid="uid://virkq2fxwmw3" path="res://default_theme.tres" id="2_3orjx"]
 [ext_resource type="PackedScene" uid="uid://b7cgghr4mk2pa" path="res://data/scenes/dungeon_heart.tscn" id="3_osh5k"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://7h7ujfkn4cf1" path="res://data/sprites/heart-01.png" id="8_qgph3"]
 [ext_resource type="PackedScene" uid="uid://b1fvhdp4123lx" path="res://data/scenes/goblin.tscn" id="8_r0k4v"]
 [ext_resource type="PackedScene" uid="uid://i7u5wjemko5a" path="res://data/scenes/lair.tscn" id="11_n1ehs"]
+[ext_resource type="PackedScene" uid="uid://djq31hr0b205" path="res://data/scenes/HUD.tscn" id="12_rl2bp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lo1o"]
 texture = ExtResource("4_eu0qo")
@@ -484,6 +485,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="EndScreen" parent="PlayerInteraction/UI" instance=ExtResource("4_q48f5")]
 visible = false
+
+[node name="HUD" parent="PlayerInteraction/UI" instance=ExtResource("12_rl2bp")]
+layout_mode = 0
 
 [connection signal="died" from="GameField/InitialObjects/PlayerDungeonHeart" to="." method="_on_player_dungeon_heart_died"]
 [connection signal="died" from="GameField/InitialObjects/EnemyDungeonHeart" to="." method="_on_enemy_dungeon_heart_died"]
